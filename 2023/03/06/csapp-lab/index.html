@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="lab1 dataLab 前提确保有一个linux系统，并已经执行过以下两条命令:安装gcc：sudo apt-get install build-essential  安装gcc的交叉编译环境.)：sudo apt-get install gcc-multilib，因为实验的程序需要以32位方式编译在CMU的CSAPP网站上下载实验所需资料，包括README, Writeup，Self-Stu">
 <meta property="og:type" content="article">
@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/29536731/1677748308138-674aa437-9522-414c-afcf-828967ad2c1b.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/29536731/1677750944719-6ccf095c-ffce-4020-8cb6-f5b0f0fde9f8.png">
 <meta property="article:published_time" content="2023-03-06T05:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-07T00:32:25.058Z">
+<meta property="article:modified_time" content="2023-03-07T05:10:38.637Z">
 <meta property="article:author" content="Elite-X">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/29536731/1669795434321-27bd7778-bde0-4d21-9ae0-425e1e785bd1.png">
@@ -98,6 +98,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -112,15 +115,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -214,9 +248,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-03-06 00:00:00 / Modified: 19:32:25" itemprop="dateCreated datePublished" datetime="2023-03-06T00:00:00-05:00">2023-03-06</time>
+      <time title="Created: 2023-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2023-03-06T00:00:00-05:00">2023-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-03-07 00:10:38" itemprop="dateModified" datetime="2023-03-07T00:10:38-05:00">2023-03-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,7 +282,7 @@
 <h1 id="lab1-dataLab"><a href="#lab1-dataLab" class="headerlink" title="lab1 dataLab"></a>lab1 dataLab</h1><p><a name="RKm5i"></a></p>
 <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>确保有一个linux系统，并已经执行过以下两条命令:<br>安装gcc：<code>sudo apt-get install build-essential</code>  <br>安装<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/855945/what-exactly-does-gcc-multilib-mean-on-ubuntu#:~:text=gcc%2Dmultilib%20is%20useful%20for,you%20get%20the%20idea">gcc的交叉编译环境</a>.)：<code>sudo apt-get install gcc-multilib</code>，因为实验的程序需要以32位方式编译<br>在<a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">CMU的CSAPP网站</a>上下载实验所需资料，包括<strong>README, Writeup，Self-Study Handout，</strong>这三部分均包含对实验的要求说明（Handout的说明在其包含的bits.c文件中由注释给出），Self-Study Handout包括用于测试的文件</p>
 <p><a name="IOcHR"></a></p>
-<h2 id="1-bitXor-x-y"><a href="#1-bitXor-x-y" class="headerlink" title="1.bitXor(x,y)"></a>1.bitXor(x,y)</h2><p>要用~和&amp;实现异或^，即将结果中 1-0，0-1对应的位设置为1<br>x&amp;y中为1的位(bit)对应 1-1； 取反后为：0-0、0-1、1-0；<br>(~x&amp;~y)为1的位(bit)对应 0-0； 取反后为：1-1、0-1、1-0；<br>两个做交集即为结果。（位向量可以表示集合，&amp;，|，~可视为 交，并，补操作）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">bitXor - x^y using only ~ and &amp; </span></span><br><span class="line"><span class="comment">Example: bitXor(4, 5) = 1</span></span><br><span class="line"><span class="comment">Legal ops: ~ &amp;</span></span><br><span class="line"><span class="comment">Max ops: 14</span></span><br><span class="line"><span class="comment">Rating: 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">bitXor</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  ~(x&amp;y) &amp; ~(~x&amp;~y) ; <span class="comment">// if regardless &#x27;+&#x27; is illegal:(~x&amp;y) + ((x)&amp;(~y)) or ~((x&amp;y) + ((~x)&amp;(~y)))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a name="mB5XE"></a></p>
+<h2 id="1-bitXor-x-y"><a href="#1-bitXor-x-y" class="headerlink" title="1.bitXor(x,y)"></a>1.bitXor(x,y)</h2><p>要用~和&amp;实现异或^，即将结果中 1-0，0-1对应的位设置为1<br>x&amp;y中为1的位(bit)对应 1-1； 取反后为：0-0、0-1、1-0；<br>(~x&amp;~y)为1的位(bit)对应 0-0； 取反后为：1-1、0-1、1-0；<br>两个做交集即为结果。（位向量可以表示集合，&amp;，|，~可视为 交，并，补操作）<br><span id="more"></span><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">bitXor - x^y using only ~ and &amp; </span></span><br><span class="line"><span class="comment">Example: bitXor(4, 5) = 1</span></span><br><span class="line"><span class="comment">Legal ops: ~ &amp;</span></span><br><span class="line"><span class="comment">Max ops: 14</span></span><br><span class="line"><span class="comment">Rating: 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">bitXor</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  ~(x&amp;y) &amp; ~(~x&amp;~y) ; <span class="comment">// if regardless &#x27;+&#x27; is illegal:(~x&amp;y) + ((x)&amp;(~y)) or ~((x&amp;y) + ((~x)&amp;(~y)))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a name="mB5XE"></a></p>
 <h2 id="2-tmin"><a href="#2-tmin" class="headerlink" title="2.tmin"></a>2.tmin</h2><p>最简单的一题：<code>000...001</code> —&gt; <code>1000...000</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">tmin - return minimum two&#x27;s complement integer </span></span><br><span class="line"><span class="comment">Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment">Max ops: 4</span></span><br><span class="line"><span class="comment">Rating: 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">tmin</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>&lt;&lt;<span class="number">31</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a name="pr9MQ"></a></p>
 <h2 id="3-isTmax-x"><a href="#3-isTmax-x" class="headerlink" title="3.isTmax(x)"></a>3.isTmax(x)</h2><p>这题最开始想到 Tmin的一个性质，即对二进制补码 Tmax关于加法的逆为其本身：Tmax+Tmax = 0；因此利用这个性质写出了<code>!((~x) + (~x))</code>，但<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/74541471/datalab-of-csappistmax-seems-unoperative?noredirect=1#comment131585049_74541471">测试结果出乎意料</a>，加法溢出导致了未知的行为。<br>根据 Tmax +1 = Tmin 的性质可以得出 ,  <code>100...000</code> + <code>011...111</code> = <code>111..1111</code> (-1)，可得出<code>!(~x^(x+1))</code>（^可替换为+）<br>处理特例-1： -1同样会产生结果1，根据 <code>-1+1==0</code>,<code>Tmax+1!=0</code>，进而<code>!(-1+1) !=0</code> ，<code>!(Tmax+1) ==0</code>.<br>所以<code>对Tmax, x+(x+1) = x</code> , <code>对-1,x+(x+1)!=x</code><br>用<code>x+(x+1)</code> 替换原式中的第一项x，最终得出结果：<code>!(~((x+!(x+1))^(x+1)))</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">isTmax - returns 1 if x is the maximum, two&#x27;s complement number,</span></span><br><span class="line"><span class="comment">and 0 otherwise </span></span><br><span class="line"><span class="comment">egal ops: ! ~ &amp; ^ | +</span></span><br><span class="line"><span class="comment">Max ops: 10</span></span><br><span class="line"><span class="comment">Rating: 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">isTmax</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> !(~((x+!(x+<span class="number">1</span>)) ^ (x+<span class="number">1</span>))) ; </span><br><span class="line">   <span class="comment">// !((~x) + (~x));  it should be right, the operator &quot;!&quot; seem to not work</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a name="kHLgK"></a></p>
 <h2 id="4-allOddBits-x"><a href="#4-allOddBits-x" class="headerlink" title="4.allOddBits(x)"></a>4.allOddBits(x)</h2><p>这道题没想出来，在x上shift的方式想了一个多小时，总是不能满足所有测试用例，说明在x上shift是行不通的。<br>用好异或即可解决：构造<code>101...1010</code>，再用该数提取x中的奇数位，最后再与<code>101...1010</code>比较<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">allOddBits - return 1 if all odd-numbered bits in word set to 1</span></span><br><span class="line"><span class="comment">where bits are numbered from 0 (least significant) to 31 (most significant)</span></span><br><span class="line"><span class="comment">Examples allOddBits(0xFFFFFFFD) = 0, allOddBits(0xAAAAAAAA) = 1</span></span><br><span class="line"><span class="comment">Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment">Max ops: 12</span></span><br><span class="line"><span class="comment">Rating: 2</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">allOddBits</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> allOdd = (<span class="number">0xAA</span> &lt;&lt; <span class="number">24</span>) + (<span class="number">0xAA</span> &lt;&lt; <span class="number">16</span>) + (<span class="number">0xAA</span> &lt;&lt; <span class="number">8</span>) + <span class="number">0xAA</span>; <span class="comment">// 10101010..101</span></span><br><span class="line">  <span class="keyword">return</span> ! ((allOdd &amp; x) ^ allOdd);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a name="sswhY"></a></p>
@@ -420,8 +460,8 @@
             <div class="post-nav-item">
             </div>
             <div class="post-nav-item">
-                <a href="/2023/03/06/assemble/" rel="next" title="assemble language">
-                  assemble language <i class="fa fa-chevron-right"></i>
+                <a href="/2023/03/06/assemble/" rel="next" title="assembly language">
+                  assembly language <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -449,7 +489,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Elite-X</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
     </div>
@@ -470,7 +510,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
 
 
 
