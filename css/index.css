@@ -1374,7 +1374,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: sans-serif;
+  font-family: PingFang SC;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1488,6 +1488,13 @@ a {
 }
 a:hover {
   color: #c490e4;
+}
+#site-title,
+#site-subtitle,
+.site-name,
+#aside-content .author-info__name,
+#aside-content .author-info__description {
+  font-family: sans-serif;
 }
 .is-center {
   text-align: center;
@@ -1691,7 +1698,7 @@ pre[class*='language-'] .token.italic {
 #article-container code {
   padding: 2px 4px;
   background: rgba(27,31,35,0.05);
-  color: #f47466;
+  color: #d864a9;
 }
 #article-container pre {
   padding: 10px 20px;
