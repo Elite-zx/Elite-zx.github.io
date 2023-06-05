@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://elite-zx.github.io/2023/05/24/computer-Network/socket-programming/</loc>
+    <loc>https://elite-zx.github.io/2023/05/24/computer-Network/socket-programming/</loc>
     
     <lastmod>2023-06-05</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/05/31/computer-Network/CS144/</loc>
+    <loc>https://elite-zx.github.io/2023/05/31/computer-Network/CS144/</loc>
     
     <lastmod>2023-06-05</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/about/index.html</loc>
+    <loc>https://elite-zx.github.io/about/index.html</loc>
     
     <lastmod>2023-06-05</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/05/06/OS-Learning/HIT-Labs/</loc>
+    <loc>https://elite-zx.github.io/2023/05/06/OS-Learning/HIT-Labs/</loc>
     
     <lastmod>2023-05-16</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/05/06/OS-Learning/HIT-OS-Record/</loc>
+    <loc>https://elite-zx.github.io/2023/05/06/OS-Learning/HIT-OS-Record/</loc>
     
     <lastmod>2023-05-16</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/categories/index.html</loc>
+    <loc>https://elite-zx.github.io/categories/index.html</loc>
     
     <lastmod>2023-05-10</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/tags/index.html</loc>
+    <loc>https://elite-zx.github.io/tags/index.html</loc>
     
     <lastmod>2023-05-10</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/02/04/CSAPP-Lab/assembly/</loc>
+    <loc>https://elite-zx.github.io/2023/03/16/CSAPP-Lab/cachelab/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/03/16/CSAPP-Lab/cachelab/</loc>
+    <loc>https://elite-zx.github.io/2023/02/04/CSAPP-Lab/assembly/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/03/06/CSAPP-Lab/datalab-bomblab-attacklab/</loc>
+    <loc>https://elite-zx.github.io/2023/03/06/CSAPP-Lab/datalab-bomblab-attacklab/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/2023/03/27/notes/ubuntu_mac/</loc>
+    <loc>https://elite-zx.github.io/2023/03/27/notes/ubuntu_mac/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -102,7 +102,7 @@
   
 
   <url>
-    <loc>http://elite-zx.github.io/</loc>
+    <loc>https://elite-zx.github.io/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -110,14 +110,14 @@
 
   
   <url>
-    <loc>http://elite-zx.github.io/tags/Foundation/</loc>
+    <loc>https://elite-zx.github.io/tags/Foundation/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/tags/tutorial/</loc>
+    <loc>https://elite-zx.github.io/tags/tutorial/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -126,42 +126,42 @@
 
   
   <url>
-    <loc>http://elite-zx.github.io/categories/CSAPP/</loc>
+    <loc>https://elite-zx.github.io/categories/CSAPP/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/categories/Operating-System/</loc>
+    <loc>https://elite-zx.github.io/categories/Computer-Network/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/categories/Computer-Network/</loc>
+    <loc>https://elite-zx.github.io/categories/Computer-Network/Computer-Network-ATopDownApproach/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/categories/gadget/</loc>
+    <loc>https://elite-zx.github.io/categories/gadget/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/categories/Operating-System/HIT/</loc>
+    <loc>https://elite-zx.github.io/categories/Operating-System/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://elite-zx.github.io/categories/Computer-Network/Computer-Network-ATopDownApproach/</loc>
+    <loc>https://elite-zx.github.io/categories/Operating-System/HIT/</loc>
     <lastmod>2023-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
