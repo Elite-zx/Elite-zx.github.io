@@ -1,0 +1,1266 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CMU CS15213: CSAPP | ELITE-X's blog</title><meta name="author" content="Elite-X"><meta name="copyright" content="Elite-X"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lab1 dataLab  前提 确保有一个linux系统，并已经执行过以下两条命令: 安装gcc：sudo apt-get install build-essential 安装gcc的交叉编译环境.)：sudo apt-get install gcc-multilib，因为实验的程序需要以32位方式编译 在CMU的CSAPP网站上下载实验所需资料，包括** README, Writeup，Se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU CS15213: CSAPP">
+<meta property="og:url" content="https://elite-zx.github.io/2023/03/06/CSAPP-Lab/CSAPP-LAB/index.html">
+<meta property="og:site_name" content="ELITE-X&#39;s blog">
+<meta property="og:description" content="lab1 dataLab  前提 确保有一个linux系统，并已经执行过以下两条命令: 安装gcc：sudo apt-get install build-essential 安装gcc的交叉编译环境.)：sudo apt-get install gcc-multilib，因为实验的程序需要以32位方式编译 在CMU的CSAPP网站上下载实验所需资料，包括** README, Writeup，Se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://elite-zx.github.io/img/cat.jpg">
+<meta property="article:published_time" content="2023-03-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-07T09:43:29.556Z">
+<meta property="article:author" content="Elite-X">
+<meta property="article:tag" content="Foundation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://elite-zx.github.io/img/cat.jpg"><link rel="shortcut icon" href="/img/linux.ico"><link rel="canonical" href="https://elite-zx.github.io/2023/03/06/CSAPP-Lab/CSAPP-LAB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="0V6rot-q_o_MYoihQQBB9P3yjYfncWGfFpAD6Ejlv84"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://unpkg.com/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://unpkg.com/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CMU CS15213: CSAPP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-07 17:43:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/bg.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://unpkg.com/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/cat.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="ELITE-X's blog"><span class="site-name">ELITE-X's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">CMU CS15213: CSAPP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-03-05T16:00:00.000Z" title="Created 2023-03-06 00:00:00">2023-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-06-07T09:43:29.556Z" title="Updated 2023-06-07 17:43:29">2023-06-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CSAPP/">CSAPP</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CMU CS15213: CSAPP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lab1-datalab"><a class="markdownIt-Anchor" href="#lab1-datalab"></a> lab1 dataLab</h1>
+<h2 id="前提"><a class="markdownIt-Anchor" href="#前提"></a> 前提</h2>
+<p>确保有一个linux系统，并已经执行过以下两条命令:<br />
+安装gcc：<code>sudo apt-get install build-essential</code><br />
+安装<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/855945/what-exactly-does-gcc-multilib-mean-on-ubuntu#:~:text=gcc%2Dmultilib%20is%20useful%20for,you%20get%20the%20idea">gcc的交叉编译环境</a>.)：<code>sudo apt-get install gcc-multilib</code>，因为实验的程序需要以32位方式编译<br />
+在<a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">CMU的CSAPP网站</a>上下载实验所需资料，包括** README, Writeup，Self-Study Handout，** 这三部分均包含对实验的要求说明（Handout的说明在其包含的bits.c文件中由注释给出），Self-Study Handout包括用于测试的文件</p>
+<h2 id="1bitxorxy"><a class="markdownIt-Anchor" href="#1bitxorxy"></a> 1.bitXor(x,y)</h2>
+<p>要用~和&amp;实现异或^，即将结果中 1-0，0-1对应的位设置为1<br />
+x&amp;y中为1的位(bit)对应 1-1； 取反后为：0-0、0-1、1-0；<br />
+(<sub>x&amp;</sub>y)为1的位(bit)对应 0-0； 取反后为：1-1、0-1、1-0；<br />
+两个做交集即为结果。（位向量可以表示集合，&amp;，|，~可视为 交，并，补操作）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+bitXor - x^y using only ~ and &amp; 
+Example: bitXor(4, 5) = 1
+Legal ops: ~ &amp;
+Max ops: 14
+Rating: 1
+*/</span>
+<span class="token keyword">int</span> <span class="token function">bitXor</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span>  <span class="token operator">~</span><span class="token punctuation">(</span>x<span class="token operator">&amp;</span>y<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token operator">~</span>x<span class="token operator">&amp;</span><span class="token operator">~</span>y<span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// if regardless '+' is illegal:(~x&amp;y) + ((x)&amp;(~y)) or ~((x&amp;y) + ((~x)&amp;(~y)))</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2tmin"><a class="markdownIt-Anchor" href="#2tmin"></a> 2.tmin</h2>
+<p>最简单的一题：<code>000...001</code> --&gt; <code>1000...000</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+tmin - return minimum two's complement integer 
+Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+Max ops: 4
+Rating: 1
+*/</span>
+<span class="token keyword">int</span> <span class="token function">tmin</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="3istmaxx"><a class="markdownIt-Anchor" href="#3istmaxx"></a> 3.isTmax(x)</h2>
+<p>这题最开始想到 Tmin的一个性质，即对二进制补码 Tmax关于加法的逆为其本身：Tmax+Tmax = 0；因此利用这个性质写出了<code>!((~x) + (~x))</code>，但<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/74541471/datalab-of-csappistmax-seems-unoperative?noredirect=1#comment131585049_74541471">测试结果出乎意料</a>，加法溢出导致了未知的行为。<br />
+根据 Tmax +1 = Tmin 的性质可以得出 ,  <code>100...000</code> + <code>011...111</code> = <code>111..1111</code> (-1)，可得出<code>!(~x^(x+1))</code>（^可替换为+）<br />
+处理特例-1： -1同样会产生结果1，根据 <code>-1+1==0</code>,<code>Tmax+1!=0</code>，进而<code>!(-1+1) !=0</code> ，<code>!(Tmax+1) ==0</code>.<br />
+所以<code>对Tmax, x+(x+1) = x</code> , <code>对-1,x+(x+1)!=x</code><br />
+用<code>x+(x+1)</code> 替换原式中的第一项x，最终得出结果：<code>!(~((x+!(x+1))^(x+1)))</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+isTmax - returns 1 if x is the maximum, two's complement number,
+and 0 otherwise 
+egal ops: ! ~ &amp; ^ | +
+Max ops: 10
+Rating: 1
+*/</span>
+<span class="token keyword">int</span> <span class="token function">isTmax</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> 
+   <span class="token comment">// !((~x) + (~x));  it should be right, the operator "!" seem to not work</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="4alloddbitsx"><a class="markdownIt-Anchor" href="#4alloddbitsx"></a> 4.allOddBits(x)</h2>
+<p>这道题没想出来，在x上shift的方式想了一个多小时，总是不能满足所有测试用例，说明在x上shift是行不通的。<br />
+用好异或即可解决：构造<code>101...1010</code>，再用该数提取x中的奇数位，最后再与<code>101...1010</code>比较</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+allOddBits - return 1 if all odd-numbered bits in word set to 1
+where bits are numbered from 0 (least significant) to 31 (most significant)
+Examples allOddBits(0xFFFFFFFD) = 0, allOddBits(0xAAAAAAAA) = 1
+Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+Max ops: 12
+Rating: 2
+*/</span>
+<span class="token keyword">int</span> <span class="token function">allOddBits</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> allOdd <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0xAA</span> <span class="token operator">&lt;&lt;</span> <span class="token number">24</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">0xAA</span> <span class="token operator">&lt;&lt;</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">0xAA</span> <span class="token operator">&lt;&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0xAA</span><span class="token punctuation">;</span> <span class="token comment">// 10101010..101</span>
+  <span class="token keyword">return</span> <span class="token operator">!</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>allOdd <span class="token operator">&amp;</span> x<span class="token punctuation">)</span> <span class="token operator">^</span> allOdd<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="5isasciidigitx"><a class="markdownIt-Anchor" href="#5isasciidigitx"></a> 5.isAsciiDigit(x)</h2>
+<p>有点难，还是自己做出来了，主要使用了掩码提取x中的指定位，再运用前几题的经验—用异或执行比较操作。<br />
+x的最后四位，3bit 与 1,2bit不能同时为1，因而有<code>!((x&amp;mask2)^mask2) + (!((x&amp;mask3)^mask3)))</code>，难点在于怎么处理好式中三部分的逻辑关系</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+ * isAsciiDigit - return 1 if 0x30 &lt;= x &lt;= 0x39 (ASCII codes for characters '0' to '9')
+ *   Example: isAsciiDigit(0x35) = 1.
+ *            isAsciiDigit(0x3a) = 0.
+ *            isAsciiDigit(0x05) = 0.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 15
+ *   Rating: 3
+ */</span>
+<span class="token keyword">int</span> <span class="token function">isAsciiDigit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> mask1 <span class="token operator">=</span> <span class="token number">0x3</span><span class="token punctuation">;</span>   <span class="token comment">// 000...0011</span>
+  <span class="token keyword">int</span> mask2 <span class="token operator">=</span> <span class="token number">0xA</span><span class="token punctuation">;</span>   <span class="token comment">// 1010</span>
+  <span class="token keyword">int</span> mask3 <span class="token operator">=</span> <span class="token number">0xC</span><span class="token punctuation">;</span>   <span class="token comment">// 1100</span>
+  <span class="token keyword">return</span>  <span class="token operator">!</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">^</span>mask1<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">&amp;</span>mask2<span class="token punctuation">)</span><span class="token operator">^</span>mask2<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">&amp;</span>mask3<span class="token punctuation">)</span><span class="token operator">^</span>mask3<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="6conditional"><a class="markdownIt-Anchor" href="#6conditional"></a> 6.conditional</h2>
+<p>比较简单，主要实现这样一个逻辑：x!=0，返回y；x=0，返回z；<br />
+涉及的操作是把x转化为0与1两个值，再把<code>000...0001</code>转化为<code>111...1111</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+ * conditional - same as x ? y : z 
+ *   Example: conditional(2,4,5) = 4
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >> 
+ *   Max ops: 16
+ *   Rating: 3
+ */</span>
+<span class="token keyword">int</span> <span class="token function">conditional</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> <span class="token keyword">int</span> z<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span>  judge <span class="token operator">=</span> <span class="token operator">!</span><span class="token punctuation">(</span>x <span class="token operator">^</span> <span class="token number">0x0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// x=0 -> judge=1,whereas x!=0 -> judge=0</span>
+  judge <span class="token operator">=</span> <span class="token punctuation">(</span>judge <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">;</span> <span class="token comment">// 000...000 or 111...111</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">~</span>judge<span class="token punctuation">)</span><span class="token operator">&amp;</span>y<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>judge<span class="token operator">&amp;</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="7islessorequalx-y"><a class="markdownIt-Anchor" href="#7islessorequalx-y"></a> 7.isLessOrEqual(x, y)</h2>
+<p>可通过减法<code>y-x&gt;=0</code>判断<code>x&lt;=y</code>，由于不存在-符，所以取x关于加法的逆-x，进而变为 x+y<br />
+那么这题就涉及加法溢出,需要对<code>x+uw  y</code>结果的三种情况的判断(negative overflow ， positive overflow)，变得复杂起来。<br />
+更好的想法是<strong>分析式子</strong><code>**y-x**</code><strong>并加入一个conditional操作</strong>：如果两者异号(正-负，负-正)，那么结果的正负的确定的；如果两者同号(同号相减不可能溢出)，则通过与Tmin相与提取符号位。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+ * isLessOrEqual - if x &lt;= y  then return 1, else return 0 
+ *   Example: isLessOrEqual(4,5) = 1.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 24
+ *   Rating: 3
+ */</span>
+<span class="token keyword">int</span> <span class="token function">isLessOrEqual</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> 
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> Tmin <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">;</span> <span class="token comment">// 100...0000</span>
+  <span class="token keyword">int</span> signY <span class="token operator">=</span> Tmin <span class="token operator">&amp;</span> y<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> signX <span class="token operator">=</span> Tmin <span class="token operator">&amp;</span> x<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> judge <span class="token operator">=</span> <span class="token punctuation">(</span>signY <span class="token operator">^</span> signX<span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">;</span> 
+  x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">~</span>x<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>judge<span class="token operator">&amp;</span>signX<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token operator">~</span><span class="token punctuation">(</span>judge<span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>y<span class="token operator">+</span>x<span class="token punctuation">)</span><span class="token operator">&amp;</span>Tmin<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// </span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="8logicalnegx"><a class="markdownIt-Anchor" href="#8logicalnegx"></a> 8.logicalNeg(x)</h2>
+<p>这题要求自己实现一个 ！逻辑，即输入0返回1，输入N（N!=0）返回0。一开始的出发点是：x=0，返回1；x 位向量存在为1的位，返回0。但是仅靠逻辑运算符无法实现该想法。<br />
+于是换了一个想法：先得到x的符号位signX。signx为1，说明x为负数，可以直接得到结果；sign为0，说明x即可能为0也可能为正数，那么就要利用补码加法操作会发生的<strong>positive overflow</strong>现象，即 Tmax + x ，对任意x&gt;0均会使结果变为负数，符号位由0 --&gt;1。（positive overflow 不同于 negative overflow，并没有产生整数溢出，因此不会导致<a target="_blank" rel="noopener" href="http://port70.net/~nsz/c/c11/n1570.html#3.4.3p3">undefined behavior</a>）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+ * logicalNeg - implement the ! operator, using all of 
+ *              the legal operators except !
+ *   Examples: logicalNeg(3) = 0, logi'calNeg(0) = 1
+ *   Legal ops: ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 12
+ *   Rating: 4 
+ */</span>
+<span class="token keyword">int</span> <span class="token function">logicalNeg</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> Tmin <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> Tmax <span class="token operator">=</span> <span class="token operator">~</span>Tmin<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> signX <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">&amp;</span>Tmin<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0x1</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>signX<span class="token operator">^</span><span class="token number">0x1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x <span class="token operator">+</span> Tmax<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token number">0x1</span><span class="token punctuation">)</span><span class="token operator">^</span><span class="token number">0x1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="9howmanybitsx"><a class="markdownIt-Anchor" href="#9howmanybitsx"></a> 9.howManyBits(x)</h2>
+<p>这题一开始想的是去除符号位后，找位向量中最左边的1的位置序号，但是我忽略了补码的一个性质：<strong>当数的符号位为1时，将数按符号位扩展之后其值不会变</strong>，如1101与101表示的是同一个值(-3)，因此找到最左边的1并不能得到最短的位数。<br />
+要找到能表示负数的最短位数，而又不受符号位拓展的影响，便要找最左边的0，而不是1。为与对正数的操作相统一，做法是把负数按位取反(Such as: 1101 -&gt; 0010)<br />
+按二分法逐步缩小范围，找到最左边的1</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* howManyBits - return the minimum number of bits required to represent x in
+ *             two's complement
+ *  Examples: howManyBits(12) = 5
+ *            howManyBits(298) = 10
+ *            howManyBits(-5) = 4
+ *            howManyBits(0)  = 1
+ *            howManyBits(-1) = 1
+ *            howManyBits(0x80000000) = 32
+ *  Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *  Max ops: 90
+ *  Rating: 4
+ */</span>
+<span class="token keyword">int</span> <span class="token function">howManyBits</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> b16<span class="token punctuation">,</span>b8<span class="token punctuation">,</span>b4<span class="token punctuation">,</span>b2<span class="token punctuation">,</span>b1<span class="token punctuation">,</span>b0<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> signX <span class="token operator">=</span> x<span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">;</span>
+  x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">~</span>signX<span class="token punctuation">)</span> <span class="token operator">&amp;</span> x<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>signX<span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">~</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// if x is negative, let sign bit:1-> 0</span>
+  
+  b16 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment">// ensure high 16 bits exist 1 or not</span>
+  x<span class="token operator">=</span>x<span class="token operator">>></span>b16<span class="token punctuation">;</span>
+  b8 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">// ensure high 8 bits </span>
+  x<span class="token operator">=</span>x<span class="token operator">>></span>b8<span class="token punctuation">;</span>
+  b4 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">// ensure high 4 bits </span>
+  x<span class="token operator">=</span>x<span class="token operator">>></span>b4<span class="token punctuation">;</span>  
+  b2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// ensure high 2 bits </span>
+  x<span class="token operator">=</span>x<span class="token operator">>></span>b2<span class="token punctuation">;</span> 
+  b1 <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ensure 31 bits or not </span>
+  x <span class="token operator">=</span> x<span class="token operator">>></span>b1<span class="token punctuation">;</span>
+  b0 <span class="token operator">=</span> x<span class="token punctuation">;</span>
+  
+  <span class="token keyword">return</span> b0<span class="token operator">+</span>b1<span class="token operator">+</span>b2<span class="token operator">+</span>b4<span class="token operator">+</span>b8<span class="token operator">+</span>b16<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 1: sign bit</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="10floatscale2uf"><a class="markdownIt-Anchor" href="#10floatscale2uf"></a> 10.floatScale2(uf)</h2>
+<p>先对题目做出一点解释：传入一个<code>unsigned</code>类型的参数，但是函数内将它解释为一个浮点数类型，即参数的值不是参数的十进制值，而是其二进制形式表示的浮点数值(M×2E)<br />
+<strong>整体思路：用掩码分别提取sign,exponent,fraction三部分，再根据exp的值分类讨论</strong><br />
+注意点：对normalized，f* 2的2是乘在了2E；而对denormalized，是乘在了frac表示的M上，这也是为什么<code>frac = frac &lt;&lt;1</code>，这也使得denormalized能转化到normalized (smoothly)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//float</span>
+<span class="token comment">/* 
+ * floatScale2 - Return bit-level equivalent of expression 2*f for
+ *   floating point argument f.
+ *   Both the argument and result are passed as unsigned int's, but
+ *   they are to be interpreted as the bit-level representation of
+ *   single-precision floating point values.
+ *   When argument is NaN, return argument    // revision: NaN or infinity
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */</span>
+<span class="token keyword">unsigned</span> <span class="token function">floatScale2</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> uf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> musk_exp<span class="token punctuation">,</span>musk_frac<span class="token punctuation">,</span>sign<span class="token punctuation">,</span>exp<span class="token punctuation">,</span>frac<span class="token punctuation">,</span>result<span class="token punctuation">;</span>
+  musk_exp <span class="token operator">=</span> <span class="token number">0xFF</span> <span class="token operator">&lt;&lt;</span> <span class="token number">23</span><span class="token punctuation">;</span>
+  musk_frac <span class="token operator">=</span> <span class="token number">0x7FFFFF</span><span class="token punctuation">;</span>
+  exp <span class="token operator">=</span> <span class="token punctuation">(</span>uf <span class="token operator">&amp;</span> musk_exp<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">23</span><span class="token punctuation">;</span>
+  frac <span class="token operator">=</span> uf <span class="token operator">&amp;</span> musk_frac<span class="token punctuation">;</span>
+  sign <span class="token operator">=</span> <span class="token number">0x1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span> <span class="token operator">&amp;</span> uf<span class="token punctuation">;</span>
+  result <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">==</span> <span class="token number">0xFF</span>  <span class="token punctuation">)</span> <span class="token comment">// NaN</span>
+     result <span class="token operator">=</span> uf<span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">==</span> <span class="token number">0x0</span><span class="token punctuation">)</span> <span class="token comment">// denormalized</span>
+  <span class="token punctuation">&#123;</span>  
+     <span class="token keyword">if</span><span class="token punctuation">(</span>frac <span class="token operator">==</span> <span class="token number">0x0</span><span class="token punctuation">)</span>
+     <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>sign<span class="token punctuation">)</span>  <span class="token comment">// -0.0</span>
+           result <span class="token operator">=</span> uf<span class="token punctuation">;</span>
+        <span class="token keyword">else</span>     <span class="token comment">// +0.0</span>
+           result <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+     
+     <span class="token keyword">else</span>
+     <span class="token punctuation">&#123;</span>
+        frac <span class="token operator">=</span> frac <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        result <span class="token operator">=</span> sign<span class="token operator">+</span> <span class="token punctuation">(</span>exp<span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">)</span> <span class="token operator">+</span> frac<span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">!=</span> <span class="token number">0x0</span> <span class="token operator">&amp;&amp;</span> exp <span class="token operator">!=</span> <span class="token number">0xFF</span><span class="token punctuation">)</span> <span class="token comment">// normalized</span>
+  <span class="token punctuation">&#123;</span>
+     exp <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+     result <span class="token operator">=</span> sign<span class="token operator">+</span> <span class="token punctuation">(</span>exp<span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">)</span> <span class="token operator">+</span> frac<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="11floatfloat2intuf"><a class="markdownIt-Anchor" href="#11floatfloat2intuf"></a> 11.floatFloat2Int(uf)</h2>
+<p>浮点数类型的这几题比前面的题要轻松很多，大概是因为可用符号和结构比较充足的原因吧。<br />
+对题目的解释：返回浮点数f的int型表示，如输入<code>12345.0 (0x4640E400)</code>, 正确输出为<code>12345 (0x3039)</code><br />
+注意点：当f的值超过32bit的int类型位向量所能表示的最大值时(2^31-1)，即E&gt;31时，属于out of range</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+ * floatFloat2Int - Return bit-level equivalent of expression (int) f
+ *   for floating point argument f.
+ *   Argument is passed as unsigned int, but
+ *   it is to be interpreted as the bit-level representation of a
+ *   single-precision floating point value.
+ *   Anything out of range (including NaN and infinity) should return
+ *   0x80000000u.
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */</span>
+ 
+<span class="token keyword">int</span> <span class="token function">floatFloat2Int</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> uf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> musk_exp<span class="token punctuation">,</span>musk_frac<span class="token punctuation">,</span>exp<span class="token punctuation">,</span>frac<span class="token punctuation">,</span>sign<span class="token punctuation">,</span>E<span class="token punctuation">,</span>Bias<span class="token punctuation">,</span>result<span class="token punctuation">;</span>
+  musk_exp <span class="token operator">=</span> <span class="token number">0xFF</span> <span class="token operator">&lt;&lt;</span> <span class="token number">23</span><span class="token punctuation">;</span>
+  musk_frac <span class="token operator">=</span> <span class="token number">0x7FFFFF</span><span class="token punctuation">;</span>
+  exp <span class="token operator">=</span> <span class="token punctuation">(</span>uf <span class="token operator">&amp;</span> musk_exp<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">23</span><span class="token punctuation">;</span>
+  frac <span class="token operator">=</span> uf <span class="token operator">&amp;</span> musk_frac<span class="token punctuation">;</span>
+  sign <span class="token operator">=</span> <span class="token number">0x1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span> <span class="token operator">&amp;</span> uf<span class="token punctuation">;</span>
+  Bias <span class="token operator">=</span> <span class="token number">127</span><span class="token punctuation">;</span>
+  result <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">==</span> <span class="token number">0xFF</span>  <span class="token punctuation">)</span> <span class="token comment">// NaN or infinity</span>
+     result <span class="token operator">=</span> <span class="token number">0x80000000u</span><span class="token punctuation">;</span>
+     
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">==</span> <span class="token number">0x0</span><span class="token punctuation">)</span>
+     result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">!=</span> <span class="token number">0x0</span> <span class="token operator">&amp;&amp;</span> exp <span class="token operator">!=</span> <span class="token number">0xFF</span><span class="token punctuation">)</span> <span class="token comment">// normalized</span>
+  <span class="token punctuation">&#123;</span>
+     E <span class="token operator">=</span> exp <span class="token operator">-</span>Bias<span class="token punctuation">;</span>  <span class="token comment">// bit_num of fraction</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>E <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>E<span class="token operator">></span><span class="token number">31</span><span class="token punctuation">)</span>
+        result <span class="token operator">=</span> <span class="token number">0x80000000u</span><span class="token punctuation">;</span>
+     <span class="token keyword">else</span>
+     <span class="token punctuation">&#123;</span>
+        frac <span class="token operator">=</span> frac<span class="token operator">>></span><span class="token punctuation">(</span><span class="token number">23</span><span class="token operator">-</span>E<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        result <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0x1</span> <span class="token operator">&lt;&lt;</span> E<span class="token punctuation">)</span> <span class="token operator">+</span> frac <span class="token punctuation">;</span> 
+        <span class="token keyword">if</span><span class="token punctuation">(</span>sign <span class="token operator">==</span> <span class="token number">0x1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">)</span>
+           result <span class="token operator">=</span> <span class="token operator">-</span> result<span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="12floatpower2x"><a class="markdownIt-Anchor" href="#12floatpower2x"></a> 12.floatPower2(x)</h2>
+<p>注意点：当2^x超过位向量所能表示的最大值（largest normalized）时，即exp 大于 254（1111 1110），属于too large</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/* 
+ * floatPower2 - Return bit-level equivalent of the expression 2.0^x
+ *   (2.0 raised to the power x) for any 32-bit integer x.
+ *
+ *   The unsigned value that is returned should have the identical bit
+ *   representation as the single-precision floating-point number 2.0^x.
+ *   If the result is too small to be represented as a denorm, return
+ *   0. If too large, return +INF.
+ * 
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. Also if, while 
+ *   Max ops: 30 
+ *   Rating: 4
+ */</span>
+<span class="token keyword">unsigned</span> <span class="token function">floatPower2</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> exp<span class="token punctuation">,</span>frac<span class="token punctuation">,</span>E<span class="token punctuation">,</span>Bias<span class="token punctuation">,</span>result<span class="token punctuation">;</span>
+  Bias <span class="token operator">=</span> <span class="token number">127</span><span class="token punctuation">;</span>
+  result <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+  E <span class="token operator">=</span> x<span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> x<span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span>
+     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">>=</span> <span class="token number">0x1</span> <span class="token operator">||</span> x <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+     frac <span class="token operator">=</span> <span class="token number">0x0</span><span class="token punctuation">;</span>
+     exp <span class="token operator">=</span> E<span class="token operator">+</span>Bias<span class="token punctuation">;</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>exp <span class="token operator">></span> <span class="token number">254</span><span class="token punctuation">)</span>  <span class="token comment">// 1111 1110</span>
+        <span class="token punctuation">&#123;</span>
+           exp <span class="token operator">=</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
+           result <span class="token operator">=</span> exp <span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token operator">+</span>frac<span class="token punctuation">;</span>         
+        <span class="token punctuation">&#125;</span>
+     <span class="token keyword">else</span>
+        result <span class="token operator">=</span> <span class="token punctuation">(</span>exp<span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">)</span> <span class="token operator">+</span> frac<span class="token punctuation">;</span> 
+  <span class="token punctuation">&#125;</span>    
+  
+  <span class="token keyword">return</span> result <span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="consequence"><a class="markdownIt-Anchor" href="#consequence"></a> consequence</h2>
+<p><code>make</code><br />
+<code>./driver.pl</code></p>
+<h3 id="-swig28-"><a class="markdownIt-Anchor" href="#-swig28-"></a> <img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a4c293cc441f32d00b3dbc0cdac50ab4.png" class=""></h3>
+<hr />
+<h1 id="lab2-bomblab"><a class="markdownIt-Anchor" href="#lab2-bomblab"></a> lab2 bombLab</h1>
+<h2 id="phase_1"><a class="markdownIt-Anchor" href="#phase_1"></a> phase_1</h2>
+<ol>
+<li>反汇编<code>main</code>函数：<code>read_line</code>函数之后寄存器<code>%rax</code>和<code>%rdi</code>存储了我们输入的字符串的首地址(后续的phase都是如此)</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/d0b5436e3bd694ef9dadbf62a885e8f4.png" class="">
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/29536731/1677163430669-16842232-e1ab-4ac7-a90d-8f9a18e1c5d2.png#averageHue=%232d2d2d&amp;clientId=u40dabece-2d53-4&amp;from=paste&amp;height=128&amp;id=u1267f1f6&amp;originHeight=128&amp;originWidth=1060&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=true&amp;size=59576&amp;status=done&amp;style=none&amp;taskId=ufdd9544b-0308-49f4-86fd-49a8013d976&amp;title=%E9%AA%8C%E8%AF%81%25rdi%E6%8C%87%E5%90%91%E8%BE%93%E5%85%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%281%29&amp;width=1060" alt="验证%rdi指向输入字符串(1)" title="验证%rdi指向输入字符串(1)" /><br />
+<img src="https://cdn.nlark.com/yuque/0/2023/png/29536731/1677163457263-f780263b-09ed-4875-bafc-0f00d7e8e894.png#averageHue=%23323232&amp;clientId=u40dabece-2d53-4&amp;from=paste&amp;height=77&amp;id=ubbe401e0&amp;originHeight=77&amp;originWidth=723&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=true&amp;size=31472&amp;status=done&amp;style=none&amp;taskId=u152fe82b-0961-427e-bd1e-8a6755f1504&amp;title=%E9%AA%8C%E8%AF%81%25rdi%E6%8C%87%E5%90%91%E8%BE%93%E5%85%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%282%29&amp;width=723" alt="验证%rdi指向输入字符串(2)" title="验证%rdi指向输入字符串(2)" /></p>
+<ol start="2">
+<li>反汇编<code>strings_not_equal</code>函数：该函数在输入字符串与目的字符串相同时，将寄存器<code>%rax</code>（通常用作函数返回值）赋值为0 (1 vice versa)</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/82696a312b38b2caffbed1decdebe663.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/68c822853ca0f63de658940ba09b7003.png" class="">
+<ol start="3">
+<li>反汇编<code>phase_1</code>函数：<code>strings_not_equal</code>函数返回值为0时，<code>test %eax, %eax</code>能使<code>je 0x400ef7&lt;phase_1+23&gt;</code>执行，phase_1 defused (explode vice versa)</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/19429a3d7d01b10593c4e4448702d955.png" class="">
+<ol start="4">
+<li>至此，只需找出目的字符串的位置即可，而目的字符串的地址明显在调用<code>strings_not_equal</code>函数之前赋值的<code>%esi：0x402400</code>寄存器中</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/848f00e31ae9e6e18106b6038356b61c.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/dd5ff3c83ce1679eab6d51fba602f527.png" class="">
+<h2 id="phase_2"><a class="markdownIt-Anchor" href="#phase_2"></a> phase_2</h2>
+<ol>
+<li>反汇编<code>read_six_numbers</code>函数：可以推断出其实现了<code>sscanf(input, &quot;%d %d %d %d %d %d&quot;,&amp;a1,&amp;a2,&amp;a3,&amp;a4,&amp;a5,&amp;a6)</code>的功能，其中<code>&amp;a1~&amp;a6</code>分别在1)<code>%rcx:0x4(%rsi)</code>2)<code>%r8:0x8(%rsi)</code>3)<code>%r9:0xc(%rsi)</code>4)<code>%rsp:0x10(%rsi)</code>5)<code>0x8(%rsp):0x14(%rsi), 0x18(%rsi) </code> 前3个指针存储在寄存器中传递给<code>sscanf</code>函数，后三个指针存储在为<code>read_six_numbers</code>函数分配的栈空间中,可以推断出<code>%rsi</code>为一个含有六个元素的数组的首地址</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/49e195de46edde2a13a3d612e3f4436f.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/848f00e31ae9e6e18106b6038356b61c.png" class="">
+<ol start="2">
+<li>反汇编<code>phase_2</code>函数：判断a1与0x1相等，不相等则explode；接着判断a2与2*a1是否相等，不相等则explode，接着都是一样的模式：判断当前数据是否与前一个数据的2倍相等，不相等则explode，直到判断完六个数据</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a2c1f6510d1747ac9f31f9caaa5f0cf6.png" class="">
+<ol start="3">
+<li>自此，我们可以判断出这六个数字分别是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>0</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>1</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>2</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>3</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>4</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">2^0,2^1,2^2,2^3,2^4,2^5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span></span></span></span></li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/cc9b4103bc02a8d67f35043fedfface7.png" class="">
+<h2 id="phase_3"><a class="markdownIt-Anchor" href="#phase_3"></a> phase_3</h2>
+<ol>
+<li>反汇编<code>phase_3</code>：从<code>(%esi)</code>的字符串可以看出该函数先读取了两个输入的值，接着判断第一个值是否大于7(<code>cmpl 0x7,0x8(rsp)</code>)，并根据这个值执行间接跳转操作(<code>jmp *0x402470(,rax,8)</code>)</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/8f19c8e6410929f9f8eadf10f37a2ccd.png" class="">
+<ol start="2">
+<li>查看0x402470附近存储的地址值(用于实现switch语句的跳转表)，只要地址值的地址可以由0x402470加上一个8的倍数得到，就是符合条件的，最后验证出来有7个地址值，进而有7个符合条件的<code>0x8(%rsp</code>：1 2 3 4 5 6 7</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/ba11b3ecaddba2f5b95962aa2edd2a17.png" class="">
+<ol start="3">
+<li>根据后续的赋值-跳转指令，可以得到对应的7个<code>0xc(%rsp)</code>：311 707 256 389 206 682 327，所以最终答案有7个: (1, 311)，(2, 707)，(3, 256)，(4, 389)，(5, 206)，(6, 682)，(7, 327)</li>
+</ol>
+<p><img src="attachment/9fe1343ecdbd946c3404a678738f74d7.png" alt="" /><img src="attachment/49e195de46edde2a13a3d612e3f4436f.png" alt="" /><br />
+<img src="attachment/c8c8680d6369eb064a9fb0434b0b3d31.png" alt="" /><img src="attachment/8f19c8e6410929f9f8eadf10f37a2ccd.png" alt="" /><img src="attachment/c8c8680d6369eb064a9fb0434b0b3d31.png" alt="" /><img src="attachment/cc9b4103bc02a8d67f35043fedfface7.png" alt="" /><img src="attachment/cc9b4103bc02a8d67f35043fedfface7.png" alt="" /><img src="attachment/49e195de46edde2a13a3d612e3f4436f.png" alt="" /><img src="attachment/33260348d45935dfc16fd4da8e94e9a0.png" alt="" /></p>
+<h2 id="phase_4"><a class="markdownIt-Anchor" href="#phase_4"></a> phase_4</h2>
+<ol>
+<li>反汇编<code>phase_4</code>函数：开头部分具有与<code>phase_3</code>函数相似的部分，均需输入两个值（留意这里，其实只需保证填充了两个值就可以），且规定了第1个值不大于14(<code>cmpl $0xe, 0x8(%rsp)</code>)，之后函数调用<code>func4</code>函数，传入三个参数<code>%edx</code>, <code>%esi</code>, <code>0x8(%rsp)</code>。虽然目前不清楚func4做了什么，但可以确定返回值必须为0(<code>test %eax, %eax</code>)。后续的<code>cmpl $0x0, 0xc(%rsp)</code>足以确定第2个值为0</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/e36a2a99955dab7372f26e5f6c54cea0.png" class="">
+<ol start="2">
+<li>反汇编<code>func4</code>函数：出现了<code>func4</code>调用自身的情况，所以<code>func4</code>是一个递归函数。第1部分将<code>%rax</code>赋值为<code>%edx</code>-<code>%esi</code>,再加上它的最高位(<code>%rax &gt;&gt; 31</code>)，接着执行算数右移。这里加上最高位的原因在于，当后续<code>%rax</code>在递归中值减少为-1时，最高位是符号位1，两者相加能保证<code>%rax</code>始终大于等于0，结合后续汇编内容，可以推断出第一个值<code>0x8(%rsp)</code>应当是一个无符号数，范围为0~14; 第2部分，可以看出这是一个二分查找的过程，如果<code>%ecx &gt; %edi</code>，那么就使<code>%ecx</code>变为<code>%esi</code>到<code>%edx</code>的中间值(<code>lea -0x1(%rcx), %edx</code>)；第3部分，结合eax返回必须为0的条件，可以推断出所有递归的函数调用均不应使第3部分的跳转指令执行，否则会使返回<code>phase_4</code>的<code>%rax</code>值为1</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/e6d3379fc4d365ff408c77b2babf4d21.png" class="">
+<ol start="3">
+<li>自此，可以推断出第1个值随递归调用次数增多而减少，进而有多个不同的值，并在减少为0时停止变化。分析后可得出有以下4个值7 3 1 0，结合第2个值为0的条件，得出符合条件的字符串有(7, 0), (3, 0), (1, 0), (0, 0)</li>
+</ol>
+<p><img src="attachment/7e450d69c1d03c9011f11f0b067acb76.png" alt="" /><img src="attachment/7e450d69c1d03c9011f11f0b067acb76.png" alt="" /><br />
+<img src="attachment/7e450d69c1d03c9011f11f0b067acb76.png" alt="" /><img src="attachment/7e450d69c1d03c9011f11f0b067acb76.png" alt="" /></p>
+<h2 id="phase_5"><a class="markdownIt-Anchor" href="#phase_5"></a> phase_5</h2>
+<ol>
+<li>反汇编<code>phase_5</code>函数：要求输入字符串包含六个字符（注意！包含空格），根据后续汇编逻辑，可反编译得到以下程序 (%fs:0x28在这里的作用：作为金丝雀值，提供堆栈保护检查)</li>
+</ol>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> index
+<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// %rax</span>
+<span class="token keyword">do</span><span class="token punctuation">&#123;</span>
+index <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+index <span class="token operator">=</span> index<span class="token operator">&amp;</span> <span class="token number">0xf</span><span class="token punctuation">;</span> <span class="token comment">// take lower four bits</span>
+dest<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> source<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// dest: (%rsp+0x10+%rax) source: 0x4024b0</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">string_not_equal</span><span class="token punctuation">(</span>dest<span class="token punctuation">,</span> target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">// target: 0x40245e --- "flyers"</span>
+      <span class="token comment">//defuse</span>
+<span class="token keyword">else</span>
+   <span class="token function">explode_bomb</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">while</span><span class="token punctuation">(</span>i<span class="token operator">></span><span class="token number">6</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/257036f48e30c46dedcbdf50015da107.png" class="">
+<ol start="2">
+<li>分别查看<code>source: 0x4024b0</code>和<code>target: 0x40245e</code>处的字符串，我们要做的就是使输入字符串形成的索引值能够从<code>0x4024b0</code>处的字符集中提取出 “flyers”</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/60e7bd6e50d50fb77b707637148c0e04.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/d363fbe15afd12811daeb0a66ede9589.png" class="">
+<ol start="3">
+<li>我们的输入字符串每个字符在内存中占一个byte，<code>movzbl (%rbx, %rax, 1), %ecx</code>说明了一次循环提取一个字符，并只取该字符的低四位(<code>and $0xf, %edx</code>)作为索引值</li>
+<li>首先先确定索引值，然后推出字符串：对比source和target两个字符串，可以确定索引值为：7 15 14 5 6 7，这6个索引值在ASCII表中对应的字符是无法输入的（eg：7 BEL），因此我们要利用只取低四位作索引值这一特点，索引值对应的四位二进制为：1001，1111，1110，0101，0110，0111 ， 因此所有(prefer a~z)低四位为以上二进制组合的均可以defuse，如ionefg，yONuvw</li>
+</ol>
+<p><img src="attachment/e01a62cd2c34aaab94c959af6be846d3.png" alt="" /><img src="attachment/e6d3379fc4d365ff408c77b2babf4d21.png" alt="" /></p>
+<h2 id="phase_6"><a class="markdownIt-Anchor" href="#phase_6"></a> phase_6</h2>
+<ol>
+<li>thinking process</li>
+</ol>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">phase_6</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">int</span> a1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">// %r12d</span>
+<span class="token keyword">int</span><span class="token operator">*</span> input_copy <span class="token operator">=</span> input<span class="token punctuation">;</span> <span class="token comment">// mov %rsp, %r13</span>
+<span class="token keyword">int</span> val<span class="token punctuation">;</span> <span class="token comment">// %eax</span>
+
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    val <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>input_copy<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 0x0(%r13)</span>
+    val <span class="token operator">=</span> val<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>val<span class="token operator">></span><span class="token number">5</span><span class="token punctuation">)</span>  <span class="token function">explode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">// 元素值不得大于6</span>
+        
+    <span class="token operator">++</span>a1<span class="token punctuation">;</span> <span class="token comment">// add $0x1, %r12d</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>a1 <span class="token operator">==</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token comment">// jmp 95</span>
+    <span class="token keyword">int</span> a2 <span class="token operator">=</span> a1<span class="token punctuation">;</span> <span class="token comment">// mov %r12d, %ebx</span>
+    <span class="token keyword">do</span><span class="token punctuation">&#123;</span>   <span class="token comment">// 65</span>
+        val <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>val <span class="token operator">==</span> <span class="token operator">*</span>input_copy<span class="token punctuation">)</span>
+            <span class="token function">explode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">++</span>a2<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">while</span><span class="token punctuation">(</span>a2<span class="token operator">&lt;=</span> <span class="token number">5</span> <span class="token punctuation">)</span> <span class="token comment">// 87</span>
+    <span class="token operator">++</span>input_copy<span class="token punctuation">;</span> <span class="token comment">// add $0x4, %r13</span>
+<span class="token punctuation">&#125;</span> <span class="token comment">// 93</span>
+<span class="token comment">/*两个信息：(已验证)
+1. 输入字符串中所有元素不大于6
+2. 输入字符串中所有元素互不相等 */</span> <span class="token number">0</span><span class="token operator">~</span><span class="token number">6</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> sentry <span class="token operator">=</span> input<span class="token operator">+</span><span class="token number">6</span><span class="token punctuation">;</span> <span class="token comment">// mov 0x18(%rsp), %rsi   95</span>
+<span class="token keyword">int</span><span class="token operator">*</span> input_copy_2 <span class="token operator">=</span> input<span class="token punctuation">;</span> <span class="token comment">// %rax</span>
+<span class="token keyword">int</span> a3 <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span> <span class="token comment">// %edx, %ecx</span>
+<span class="token keyword">do</span><span class="token punctuation">&#123;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>input_copy_2<span class="token punctuation">)</span> <span class="token operator">=</span> a3 <span class="token operator">-</span> <span class="token operator">*</span><span class="token punctuation">(</span>input_copy_2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">++</span>input_copy_2<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">while</span><span class="token punctuation">(</span>input_copy_2 <span class="token operator">!=</span> sentry<span class="token punctuation">)</span>
+<span class="token comment">/* 更新输入字符串所有值为：7-初始值(已证实), 
+结合之前的信息，说明此时的输入字符串均不小于1，且只可能存在一个等于1 */</span>
+ 
+<span class="token keyword">int</span> a4 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 123 %esi  -- index</span>
+<span class="token keyword">int</span> a5<span class="token punctuation">;</span> <span class="token comment">// %edx</span>
+<span class="token keyword">int</span> a6<span class="token punctuation">;</span> <span class="token comment">// %eax  -- index</span>
+offset_166<span class="token operator">:</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>input<span class="token punctuation">[</span>a4<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// 166  %ecx</span>
+<span class="token punctuation">&#123;</span>
+    a5 <span class="token operator">=</span> <span class="token number">0x6032d0</span><span class="token punctuation">;</span> <span class="token comment">// 143</span>
+    offset_148<span class="token operator">:</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span><span class="token number">0x20</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>a4<span class="token punctuation">)</span> <span class="token operator">=</span> a5<span class="token punctuation">;</span> <span class="token comment">// 148 [8]:20, [10]:28, [12]:30, [14]:38, [16]:40,[18]:48</span>
+                             <span class="token comment">//   0x6032d0, 0x6032e0  0x6032f0 0x603200 0x603310 0x603320   </span>
+    a4 <span class="token operator">+=</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment">// add $0x4, %rsi </span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>a4 <span class="token operator">==</span>  <span class="token number">24</span> <span class="token punctuation">)</span>
+        <span class="token keyword">goto</span> offset_183<span class="token punctuation">;</span> <span class="token comment">// 161 </span>
+    <span class="token keyword">else</span> 
+        <span class="token keyword">goto</span> offset_166<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span>  <span class="token comment">// 均要走这个else， 可能有一个不走这个else -->肯定有一个不走</span>
+<span class="token punctuation">&#123;</span>
+    a6 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 171  </span>
+    <span class="token operator">&amp;</span>a5 <span class="token operator">=</span> <span class="token number">0x6032d0</span><span class="token punctuation">;</span> <span class="token comment">// 176  这个地址+0x8能多次跳转</span>
+    <span class="token keyword">do</span><span class="token punctuation">&#123;</span> <span class="token comment">// 130</span>
+        a5 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a5 <span class="token operator">+</span> <span class="token number">0x8</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// mov 0x8(%rdx),%rdx  链表?</span>
+        <span class="token operator">++</span>a6<span class="token punctuation">;</span> 
+    <span class="token punctuation">&#125;</span><span class="token keyword">while</span><span class="token punctuation">(</span>a6 <span class="token operator">!=</span> <span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span>a4<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token comment">// 139  (must have 1-6), 2-5, 3-4 , 4-3, 5-2, 6-1, (7-0)</span>
+    <span class="token keyword">goto</span> offset_148<span class="token punctuation">;</span>         <span class="token comment">// recorrect: 3-4, 4-3,5-2,6-1,1-6,2-5</span>
+<span class="token punctuation">&#125;</span> <span class="token comment">// 181</span>
+
+offset_183：    function<span class="token operator">:</span> link node in order
+<span class="token keyword">int</span> a7 <span class="token operator">=</span> input<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//%rbx 0x20(%rsp)   *(input+ 8) ~ *(input+16) all represent a address</span>
+<span class="token keyword">int</span><span class="token operator">*</span> input_copy_3 <span class="token operator">=</span> input<span class="token operator">+</span><span class="token number">10</span> <span class="token comment">// %rax  0x28(%rsp)</span>
+<span class="token keyword">int</span><span class="token operator">*</span> input_copy_4 <span class="token operator">=</span> input<span class="token operator">+</span><span class="token number">20</span> <span class="token comment">// %rsi  0x50(%rsp)</span>
+a3 <span class="token operator">=</span> a7<span class="token punctuation">;</span> <span class="token comment">// a3:%rcx</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">// 201</span>
+    a5 <span class="token operator">=</span> <span class="token operator">*</span>input_copy_3<span class="token punctuation">;</span> <span class="token comment">//a5:%rdx [10][12]...[18][20] 6</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>a3<span class="token operator">+</span><span class="token number">0x8</span><span class="token punctuation">)</span> <span class="token operator">=</span> a5<span class="token punctuation">;</span> <span class="token comment">// 0x8(%rcx)</span>
+    input_copy_3 <span class="token operator">+=</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">// 0x8 </span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>input_copy_3 <span class="token operator">==</span> input_copy_4<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token comment">// 215 </span>
+    a3 <span class="token operator">=</span> a5<span class="token punctuation">;</span> <span class="token comment">// mov %rdx, %rcx</span>
+<span class="token punctuation">&#125;</span>    <span class="token comment">//   make  *(a[i-2] + 0x8) = a[i] (i = i+2: 10 12 .. 18)</span>
+<span class="token comment">// 结束时 %rdx = * (input + 18)</span>
+
+<span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 222   set last node's pointer to nullptr</span>
+<span class="token keyword">int</span> a8 <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token comment">// %ebp</span>
+<span class="token keyword">int</span> a9 <span class="token comment">// %rax </span>
+<span class="token keyword">do</span>
+<span class="token punctuation">&#123;</span>
+ <span class="token operator">&amp;</span>a9 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>a7<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// %rax   initial a7 = input[8]</span>
+  a9 <span class="token operator">=</span> <span class="token operator">*</span>a9<span class="token punctuation">;</span> <span class="token comment">// mov (%rax), %eax</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> a9<span class="token punctuation">)</span> <span class="token comment">// cmp %eax, (%rbx) </span>
+    <span class="token function">explode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 验证是否降序</span>
+a7 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>input<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// mov 0x8(%rbx), %rbx 更新%rbx  </span>
+<span class="token operator">--</span>a8<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">while</span><span class="token punctuation">(</span>a8<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// over</span>
+    
+<span class="token comment">/*inital:
+0x14c(0): 332;
+0x0a8(1): 168;
+0x39c(2): 924;
+0x2b3(3): 691
+0x1dd(4): 477
+0x1bb(5): 443
+
+2->3->4->5->0->1 */</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>我完成phase_6的时间比前五个加起来还多，从第一次反汇编phase_6到彻底搞清楚phase_6各个步骤做了什么并推出答案花的时间可能接近有6，7个小时了，确定了这是一个链表问题，将链表排序并验证。这个phase里很关键的信息就是<code>0x6032d0</code>这个地址值，通过查看该地址后24个字的内容，可以看见这里储存了一个含有6个结点的链表，然后根据这个信息分析并反编译汇编代码， 即可发现我们的最终目的是使<code>0x6032d0</code>这里的链表降序排列。输入自己推算出的答案，看见终端显示出拆弹成功真的超开心</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/acd690b3b50691d1f6e3f12a5cbd3c85.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/40edff8d78bfb0c20b5b843703546e03.png" class="">
+<h2 id="secret_phase"><a class="markdownIt-Anchor" href="#secret_phase"></a> secret_phase</h2>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/532ab5bef0f2b1fbcb4e3a75616980cc.png" class="">
+<ol>
+<li>发现彩蛋</li>
+</ol>
+<p>以上语句说明邪恶博士还给我们留了一手， 拆弹还没彻底完成，这个easter egg在bomb.c中是发现不了的，只能在bomb文件中寻找。CMU给出的writeup给了我们明确的提示，可以用<code>objdump -t bomb</code>查看函数的符号表，包括全局变量的名称和所有函数的名称，进而我们可以在符号表中发现secret_phase。</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/022618c6c2df7c53f1385e093b46d9bf.png" class="">
+<ol start="2">
+<li>怎么触发</li>
+</ol>
+<p>1)谁调用了secret_phase：<code>secret_phase</code>既然作为一个函数，那么就需要被调用，邪恶博士不会做了炸弹而不接引线，因此我们要在<code>main</code>函数中寻找可能调用<code>secret_base</code>的语句，既然phase_1到phase_6我们都分析过源码，所以调用语句肯定只能存在<code>phase_defused</code>函数中，反汇编<code>phase_defused</code>函数，果然发现了调用<code>secret_phase</code>的指令</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/d198271aa8a29539467dd82ee47ef6ad.png" class="">
+<p>2）在phase_defused中如何触发：从<code>main</code>函数可以看出，bomb文件在每次未触发炸弹而执行完一个phase的时候都会调用一次<code>phase_defused</code>。分析phase_defused，该函数当输入字符串表示分隔的数字值时，如果数字个数小于6个，直接返回，对应phase1~phase5；如果数字等于6个，继续执行，对应phase6</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/02e77af27b1c4e865e36db8907ca7b63.png" class="">
+<p>接着从地址<code>0x603870</code>处读取两个数字，一个字符串</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/840754c4bede736bec5534802d03b4c2.png" class="">
+<p>经过验证，地址<code>0x603870</code>为phase_4阶段输入字符串的开始地址<br />
+<img src="attachment/a660c4c01c2033e2876e3574083862bd.png" alt="" /><img src="attachment/42cd427d395bd0887302dfbe5f3a095f.png" alt="" /><br />
+根据后续逻辑，只要在phase_4阶段时输入<code>&quot;7 0 DrEvil&quot;</code>即可触发<code>secret_bomb</code></p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/172349e0413d8582ce691ac2f1abecf3.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/6275de0a9feabb7b06a305b4e04ba190.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a7dc7f4a3fb6f6a4c1c13204acce6c2e.png" class="">
+<ol start="3">
+<li>终章：拆解secret_phase</li>
+</ol>
+<p>1）反编译secret_base</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">secret_phase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> input_2<span class="token punctuation">;</span><span class="token comment">// (%rdi)</span>
+    <span class="token operator">&amp;</span>input_2 <span class="token operator">=</span> <span class="token function">read_line</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//  %rdi</span>
+    
+    <span class="token keyword">int</span> a1 <span class="token operator">=</span> <span class="token number">0xa</span><span class="token punctuation">;</span> <span class="token comment">// %edx</span>
+    <span class="token keyword">int</span> a2 <span class="token operator">=</span> <span class="token number">0x0</span><span class="token punctuation">;</span> <span class="token comment">// %esi</span>
+    <span class="token keyword">long</span> <span class="token keyword">int</span> input_num_1 <span class="token operator">=</span> <span class="token function">strtol</span><span class="token punctuation">(</span>input_2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// %rax</span>
+    <span class="token keyword">long</span> <span class="token keyword">int</span> input_num_2 <span class="token operator">=</span> input_num_1 <span class="token comment">// %rbx</span>
+    input_num_1 <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>input_num_1 <span class="token operator">></span> <span class="token number">0x3e8</span> <span class="token comment">/*1000*/</span><span class="token punctuation">)</span> <span class="token function">explode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 输入的数字字符串 值小于 1001</span>
+    a2 <span class="token operator">=</span> input_num_2<span class="token punctuation">;</span><span class="token comment">// mov %ebx, %esi  </span>
+    <span class="token operator">&amp;</span>input_2 <span class="token operator">=</span> <span class="token number">0x6030f0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ret <span class="token operator">=</span> <span class="token function">fun7</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2<span class="token punctuation">,</span>a2<span class="token punctuation">,</span>input_num_1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ret_value: %rax</span>
+    
+    <span class="token keyword">if</span><span class="token punctuation">(</span>ret <span class="token operator">==</span> <span class="token number">0x2</span><span class="token punctuation">)</span>
+        <span class="token function">defused</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token function">explode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">fun7</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2<span class="token punctuation">,</span> a2<span class="token punctuation">,</span> input_num_1<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2 <span class="token operator">==</span> <span class="token number">0x0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// avoid endless recursion</span>
+    <span class="token keyword">int</span> a3 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 9 %edx   initial a3 = 24</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>a3 <span class="token operator">&lt;=</span> a2<span class="token punctuation">)</span> <span class="token keyword">goto</span> offset_28<span class="token punctuation">;</span> <span class="token comment">// 13  a2是输入值 </span>
+
+    <span class="token comment">// a3 > a2</span>
+    input_2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2 <span class="token operator">+</span> <span class="token number">0x8</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// +2  turn left</span>
+    input_num_1 <span class="token operator">=</span> <span class="token function">fun7</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2<span class="token punctuation">,</span> a2<span class="token punctuation">,</span> input_num_1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 19</span>
+
+    input_num_1 <span class="token operator">*=</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">// input_num_q is 1 here</span>
+    <span class="token keyword">return</span> input_num_1<span class="token punctuation">;</span>
+
+    offset_28<span class="token operator">:</span>
+    input_num_1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>a3 <span class="token operator">==</span> a2<span class="token punctuation">)</span> <span class="token keyword">return</span> input_num_1<span class="token punctuation">;</span>	
+
+    <span class="token comment">// a3 &lt; a2</span>
+    input_2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2 <span class="token operator">+</span> <span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// +4   turn right</span>
+    input_num_1 <span class="token operator">=</span> <span class="token function">fun7</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>input_2<span class="token punctuation">,</span> a2<span class="token punctuation">,</span> input_num_1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 0</span>
+    input_num_1 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>input_num_1 <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 1</span>
+    <span class="token keyword">return</span> input_num_1<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>2）有了phase_6的经验，我在查看了特殊地址<code>0x6030f0</code>的内容后很快就反应出这又是链表相关的问题，扩大查看的地址范围后，我发现地址<code>0x6030f0</code>为起点进行索引，后面120个字大小的地址空间，表示一个高度为3，结点大小为8 words的二叉搜索树；再结合<code>secret_phase</code>的逻辑，在子函数<code>fun7</code>返回值为2时defuse，经过分析，<code>fun7</code>这个递归函数，在最后三次递归时为turn left(<code>&amp;input_2 + 0x8</code>）-&gt;turn right(<code>&amp;input_2 + 0x10</code>) -&gt; return 0时才能保证最终返回值为2，画出二叉树后，可以很清楚的看到，满足这样三步走的有且仅有子结点22 （子结点22再左走一步到叶子结点20，只是重复了一遍return 0，也满足要求，因此20也是最终答案，）</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a05e697174deb4b8d970e125f4076696.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/d198271aa8a29539467dd82ee47ef6ad.png" class="">
+<ol start="3">
+<li>至此，整个bomblab就结束了，花费了我十多个小时完成了这个lab还是很值得的，伴随这一个又一个defuse，成就感是满满的，哈哈哈</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/022618c6c2df7c53f1385e093b46d9bf.png" class="">
+<hr />
+<h1 id="lab3-attacklab"><a class="markdownIt-Anchor" href="#lab3-attacklab"></a> lab3 attacklab</h1>
+<h2 id="前提-2"><a class="markdownIt-Anchor" href="#前提-2"></a> 前提</h2>
+<ol>
+<li>注意！该实验在ubuntu22.04上是没法做的，任何形式的攻击都会引发segment fault，建议用ubuntu22.04的同学跟博主一样另外再安装一个ubuntu20.04</li>
+</ol>
+<p>博主就是在这踩了坑，一直以为操作有问题，后来带着实验的执行环境google了一下才发现这个问题</p>
+<ol start="2">
+<li>exploit string用工具<code>hex/2raw</code>构造并传递给字符串，该工具要求输入的每个字节用2-digit 十六进制数表示，两个字节之间用空格分开，输出对应的二进制序列。</li>
+</ol>
+<p>writeup的附录A介绍了多种<code>hex/2raw</code>接受输入字符串并传递给ctarget的多种方式，我习惯用：<br />
+<code>./hex2raw &lt; exploit_string.txt | ./ctarget -q</code><br />
+这条命令将<code>exploit_string.txt</code>作为<code>hex2raw</code>的输入，并建立管道将<code>hex2raw</code>的输出传输到<code>./ctarget</code>中，-q命令选项表示不向评分服务器发送信息，如果你是CMU的可以不用这个选项（哈哈哈）。该工具应该只接受文件流的输入，如果在终端直接执行<code>./hex2raw</code>那么将无法中止输入</p>
+<h2 id="phase_1-2"><a class="markdownIt-Anchor" href="#phase_1-2"></a> phase_1</h2>
+<ol>
+<li>反汇编<code>ctarget</code>：可用<code>objdump -d ctarget</code>获取ctarget的汇编版本，为了方便，我们直接将输出定向到一个asm文件中</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/5e39b3abb1bc5e7f4330d928004e1682.png" class="">
+<p>这样我们每次查看ctarget的汇编版本时，就不用重新反汇编一次了</p>
+<ol start="2">
+<li><code>vim dis_ctarget.asm</code>查看<code>getbuf</code>函数的汇编代码，可以看见它的栈帧长度为0x28（40）个字节，因此要覆盖在这之上的调用者<code>test</code>函数的ret地址，只需在缓冲区写入0x30（48）个字节即可；查看<code>touch1</code>函数，它的地址在<code>0x004017c0</code>处，因此要在exploit_string的最后8个字节上填入c0 17 40 00（little-endian）</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/77ee6da89546a4114df2d33fbf821a72.png" class="">
+<ol start="3">
+<li><code>vim phase_1.txt</code>输入</li>
+</ol>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.15999999999999992em" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>c</mi><mn>0</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>17</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>40</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>00</mn></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{matrix}
+  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00 &amp;00 \\
+  &amp;00 &amp;00  &amp; 00 &amp;00  &amp;00  &amp;00  &amp;00 &amp;00 \\
+  &amp;00  &amp;00  &amp;00  &amp;00 &amp;00  &amp;00  &amp;00  &amp;00\\
+  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00\\
+  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00  &amp;00\\
+  &amp;c0 &amp;17  &amp;40  &amp;00  &amp;00  &amp;00  &amp;00
+\end{matrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:7.200000000000001em;vertical-align:-3.35em;"></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-5.8500000000000005em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-4.650000000000001em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-3.45em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-1.05em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:0.1500000000000002em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">7</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.35em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.850000000000001em;"><span style="top:-6.010000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-4.810000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.6100000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span></span></span></span><br />
+最后留了一个字节以供gets放入’ \n ’ (不放也没事，执行touch1能直接退出程序)。最后一行result显示PASS就说明攻击生效了</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/77ee6da89546a4114df2d33fbf821a72.png" class="">
+<h2 id="phase_2-2"><a class="markdownIt-Anchor" href="#phase_2-2"></a> phase_2</h2>
+<ol>
+<li>编写汇编代码，转化为字节码：<code>vim asb.s</code>，输入以下汇编代码（push可直接压入地址，不必先放入寄存器）</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/97bcb18bfbfeb7e9317be7ad13681c7d.png" class="">
+<p>line1将<code>cookie</code>值赋给<code>%rdi</code>传参给<code>touch2</code>；ine2将2<code>touch2</code>的地址压入栈中，目的在于在<code>ret</code>指令执行后，从栈中弹出并赋值给<code>%rip</code>的返回地址是<code>touch2</code>的地址</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/aeea8b6bce1c1c133dbdb9f1a3d99fc5.png" class="">
+<p>writeup的附录B提示我们将gcc与objdump结合使用产生指令序列的字节码<br />
+<code>gcc -c asb.s</code><br />
+<code>objdump -d asb.o &gt; asb.d</code><br />
+这样我们就得到了指令序列的字节码，可用于构造exploit_string</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/545f6b671736fb44dfde1345b0c75cff.png" class="">
+<ol start="2">
+<li>构造<code>phase_2.txt</code>，因为<code>asb.o</code>中的代码本身就已经逆序，所以直接输入即可；用于覆盖<code>test</code>栈帧中返回地址的值可由<code>%rsp</code>的值推算出（取决于你将字节码放在缓冲区的位置），这里为了方便， 我将字节码放在了缓冲区的开头，则用于覆盖的地址就是<code>%rsp</code>的值</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/7ff73ffc1bf9e9611f1cd79ae7de1f2c.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/6a17fd900e3467ceb030942fd0334f13.png" class="">
+<ol start="3">
+<li>攻击生效</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/0cf71efb20d9854b0a1e6e1cfb8a3252.png" class="">
+<h2 id="phase_3-2"><a class="markdownIt-Anchor" href="#phase_3-2"></a> phase_3</h2>
+<ol>
+<li>与<code>phase_2</code>很像，但这次要传递的参数是字符串形式的<code>cookie</code>。因为<code>getbuf</code>的栈帧在函数结束后就被操作系统收回，且会被后续函数调用占用，因此我们将字符串<code>cookie</code>放在<code>test</code>函数的栈帧中，地址<code>0x5561dca8</code>；获取<code>touch3</code>函数的地址，编写攻击代码</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/7210c3d6fbde68b1e7705b12b56e6d38.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/75eb7fac02ee199b822f199e5e69d09f.png" class="">
+<ol start="2">
+<li><code>ascii -ax</code>查看十六进制形式的ascii-table，得出<code>&quot;59b997fa&quot;</code>的ascii形式为<code>35 39 62 39 39 37 66 61</code></li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a05e697174deb4b8d970e125f4076696.png" class="">
+<ol start="3">
+<li>覆盖返回地址和test栈帧，写入攻击代码的地址和字符串<code>cookie</code></li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a05e697174deb4b8d970e125f4076696.png" class="">
+<ol start="4">
+<li>攻击生效</li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a85afbd69b690948359583ead1d13729.png" class="">
+<h2 id="phase_4-2"><a class="markdownIt-Anchor" href="#phase_4-2"></a> phase_4</h2>
+<p>确定攻击方案：<code>rtarget</code>由于具备栈随机化，以及栈内代码不可执行这两个属性，所以如果要在栈中插入攻击代码将面临两个问题：1）用于指向攻击代码的地址无法确定：因为我们要把攻击代码放入栈中，但栈的位置不确定，进而我们也无法创建指向攻击代码的指针  2）攻击代码无法执行，因为栈被标注为不可执行。writeup给了我们明确的提示，既然我们无法插入自己的攻击代码，那么就用<code>ctarget</code>自身的代码实现攻击，具体做法是通过地址跳转，截取<code>ctarget</code>的部分代码用作攻击代码；<code>gadget</code>指的是几条指令后跟着一条ret指令的程序片段，如果把函数栈设置为一连串<code>gadget</code>的地址，那么一旦执行其中一个<code>gadget</code>，<code>ret</code>指令就会不断的从栈中弹出新的<code>gadget</code>的地址赋给<code>%rip</code>,由此引发多个<code>gadget</code>的连续执行（注意函数调用栈地址的随机化跟程序代码的地址无关）</p>
+<ol>
+<li><code>cookie</code>的值不可能从<code>rgadget</code>中找到，需要我们自己放到栈中，如同<code>phase_3</code>一样，放的位置不能是<code>getbuf</code>的缓冲区，因此我们将其放到<code>test</code>的栈帧中；接着要实现<code>mov $0x59b997fa,%rdi</code>，需执行<code>popq %rdi</code>，根据writeup的参照表，先在<code>start_farm</code>和<code>end_farm</code>之间寻找<code>5f</code>，结果没有，但是找到了<code>58 90</code>,地址为<code>0x004019ab</code>，这代表<code>popq %rax  nop</code>，因此我们需要用<code>%rax</code>作介质传递<code>cookie</code>给<code>%rdi</code>，而在farm中我们也确实找到了<code>movq %rax, %rdi：48 89 c7</code>，地址为<code>0x004019c5</code>，一共用到了两个<code>gadget</code></li>
+</ol>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/bbea916ea56dfc9a947de21da0b02567.png" class="">
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/a85afbd69b690948359583ead1d13729.png" class="">
+<ol start="2">
+<li>按照下图逻辑编写phase_4，可实现攻击。自此attacklab就结束了，第一次感觉自己当了一名hacker，感觉很棒</li>
+</ol>
+<p><img src="attachment/db45ead78f5aca153cab1156d508daef.png" alt="" /><img src="attachment/50bc769c1e6db59af741f48d8624ac96.png" alt="" /></p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/7c0c3e8a239918e820904293bd7101c2.png" class="">
+<hr />
+<h1 id="lab4-cachelab"><a class="markdownIt-Anchor" href="#lab4-cachelab"></a> lab4 cachelab</h1>
+<h2 id="parta"><a class="markdownIt-Anchor" href="#parta"></a> PartA</h2>
+<h3 id="1-要做什么"><a class="markdownIt-Anchor" href="#1-要做什么"></a> 1. 要做什么：</h3>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2023/pdf/29536731/1679034059665-5dc8f6ef-14b4-44d3-b7d7-86d86787439b.pdf?_lake_card=%7B%22src%22%3A%22https%3A%2F%2Fwww.yuque.com%2Fattachments%2Fyuque%2F0%2F2023%2Fpdf%2F29536731%2F1679034059665-5dc8f6ef-14b4-44d3-b7d7-86d86787439b.pdf%22%2C%22name%22%3A%22cachelab.pdf%22%2C%22size%22%3A61287%2C%22ext%22%3A%22pdf%22%2C%22source%22%3A%22%22%2C%22status%22%3A%22done%22%2C%22download%22%3Atrue%2C%22taskId%22%3A%22ucfed49fb-dba4-4b45-976d-96d9752defc%22%2C%22taskType%22%3A%22upload%22%2C%22type%22%3A%22application%2Fpdf%22%2C%22__spacing%22%3A%22both%22%2C%22mode%22%3A%22title%22%2C%22id%22%3A%22iZZyy%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22card%22%3A%22file%22%7D">cachelab.pdf</a> <a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2023/pdf/29536731/1679034059905-2f06047b-ba4e-4abb-b642-f43a20552896.pdf?_lake_card=%7B%22src%22%3A%22https%3A%2F%2Fwww.yuque.com%2Fattachments%2Fyuque%2F0%2F2023%2Fpdf%2F29536731%2F1679034059905-2f06047b-ba4e-4abb-b642-f43a20552896.pdf%22%2C%22name%22%3A%22rec07.pdf%22%2C%22size%22%3A373293%2C%22ext%22%3A%22pdf%22%2C%22source%22%3A%22%22%2C%22status%22%3A%22done%22%2C%22download%22%3Atrue%2C%22taskId%22%3A%22u3bcb76bc-9a98-45cd-a08f-c450961f38a%22%2C%22taskType%22%3A%22upload%22%2C%22type%22%3A%22application%2Fpdf%22%2C%22__spacing%22%3A%22both%22%2C%22mode%22%3A%22title%22%2C%22id%22%3A%22M2QOk%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22card%22%3A%22file%22%7D">rec07.pdf</a><br />
+partA 中提到的<code>.trace</code>文件是一个可执行文件的内存访问记录，由Linux程序<code>valgrind</code>产生。partA要求我们构造一个模拟cache行为的<code>cache simulator</code>，将<code>.trace</code>文件作为输入(实际上就是一条条内存访问记录，模拟内存访问过程)，并伴有三个输入参数：</p>
+<ol>
+<li>组索引位数 -s  （<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><msup><mn>2</mn><mi>s</mi></msup></mrow><annotation encoding="application/x-tex">S = 2^s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span></span></span></span></span></span></span></span>为高速缓存组的组数）</li>
+<li>高速缓存行数 -E</li>
+<li>块偏移位数 -b （<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><msup><mn>2</mn><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">B = 2^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span></span></span></span></span></span></span>为高速缓存块的大小）</li>
+</ol>
+<p>根据内存访问记录，输出每条访问的结果（hit/miss/evict)，输出操作通过调用<code>printSummary(hit_count, miss_count, eviction_count)</code>函数完成，输出结果应当与作者提供给我们的<code>reference cache simulator</code>相同，运行<code>make</code>+<code>./test-csim</code>获取评分</p>
+<h3 id="2-getopt函数的用法"><a class="markdownIt-Anchor" href="#2-getopt函数的用法"></a> 2. getopt函数的用法</h3>
+<p>由于三个参数通过命令行输入，因此我们需要通过C语言库中的<code>getopt</code>函数，结合switch语句从命令行中获取参数值<br />
+C语言中的<code>main</code>函数是程序的入口函数，它包含两个参数：<code>argc</code>和<code>argv</code>。它们的作用如下：</p>
+<ol>
+<li>argc参数</li>
+</ol>
+<p>argc参数表示程序运行时命令行参数的个数（argument count），包括程序名本身。因此，argc的值至少为1，即第一个参数是程序名本身。如果程序没有接受任何命令行参数，则argc的值为1。</p>
+<ol>
+<li>argv参数</li>
+</ol>
+<p>argv参数是一个字符串指针数组（argument vector），每个元素指向一个命令行参数。其中，argv[0]指向程序名本身，argv[1]、argv[2]等等依次指向后续的命令行参数。<br />
+通过argc和argv参数，程序可以接收命令行传递的参数，从而实现更加灵活和可配置的功能。例如，可以通过命令行参数指定程序要处理的文件名、程序要使用的配置文件、程序要输出的日志级别等等。程序可以根据不同的命令行参数采取不同的行为，从而实现更加灵活和可配置的功能。<br />
+C语言中的<code>getopt</code>函数可以帮助程序解析命令行参数。<code>getopt</code>函数通常与<code>argc</code>和<code>argv</code>参数一起使用，可以从命令行中提取选项和参数，并根据需要执行相应的操作。以下是<code>getopt</code>函数的一般用法：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> opt<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>opt <span class="token operator">=</span> <span class="token function">getopt</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"abc:d"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>opt<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">case</span> <span class="token char">'a'</span><span class="token operator">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Option -a\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token char">'b'</span><span class="token operator">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Option -b\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token char">'c'</span><span class="token operator">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Option -c with value '%s'\n"</span><span class="token punctuation">,</span> optarg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token char">'d'</span><span class="token operator">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Option -d\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token char">'?'</span><span class="token operator">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Unknown option: %c\n"</span><span class="token punctuation">,</span> optopt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在上面的例子中，<code>getopt</code>函数的第一个参数是<code>argc</code>，第二个参数是<code>argv</code>，第三个参数是一个字符串，它包含可接受的选项和参数信息。在这个字符串中，每个字符表示一个选项，如果这个选项需要接受一个参数，则在后面加上一个冒号。例如，<code>&quot;abc:d&quot;</code>表示可接受的选项有<code>-a</code>、<code>-b</code>、<code>-c</code>和<code>-d</code>，其中<code>-c</code>选项需要接受一个参数。<br />
+<code>getopt</code>函数会循环遍历命令行中的所有选项，每次返回一个选项和其参数（如果有）。在循环中，使用<code>switch</code>语句根据选项进行相应的操作。如果<code>getopt</code>函数发现了一个未知的选项，它会返回<code>?</code>,并将这个选项保存在<code>optopt</code>变量中。<br />
+以下是一些示例命令行及其对应的输出：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ./a.out <span class="token parameter variable">-a</span> <span class="token parameter variable">-b</span> <span class="token parameter variable">-c</span> filename <span class="token parameter variable">-d</span>
+Option <span class="token parameter variable">-a</span>
+Option <span class="token parameter variable">-b</span>
+Option <span class="token parameter variable">-c</span> with value <span class="token string">'filename'</span>
+Option <span class="token parameter variable">-d</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ./a.out <span class="token parameter variable">-a</span> <span class="token parameter variable">-b</span> <span class="token parameter variable">-c</span>
+Option <span class="token parameter variable">-a</span>
+Option <span class="token parameter variable">-b</span>
+Unknown option: c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在使用<code>getopt</code>函数时，需要注意以下几点：</p>
+<ol>
+<li>在循环中，<code>optarg</code>变量保存当前选项的参数（如果有），可以通过这个变量获取参数的值。变量类型为字符串，可通过<code>atoi</code>函数转化为整型。</li>
+<li>如果一个选项需要接受一个参数，但是没有给出参数，或者参数不合法，<code>getopt</code>函数会返回<code>?</code>，并将这个选项保存在<code>optopt</code>变量</li>
+<li>如果一个选项在可接受的选项字符串中没有指定，<code>getopt</code>函数会返回<code>-1</code>，并结束循环</li>
+</ol>
+<p><code>getopt</code>函数的第三个参数是一个字符串，用于指定程序支持的命令行选项和参数。<br />
+虽然<code>getopt</code>函数可以遍历所有命令行参数，但是在不指定可接受选项字符串的情况下，<code>getopt</code>函数不知道哪些参数是选项，哪些是参数，也不知道选项是否需要参数。指定<br />
+可接受选项字符串可以告诉<code>getopt</code>函数哪些选项是合法的，以及它们是否需要参数，从而使<code>getopt</code>函数能够正确地解析命令行参数。接受选项字符串的格式为一个字符串，由选项和参数组成，每个选项用一个字符表示，如果选项需要参数，则在选项字符后面跟一个冒号。例如，字符串<code>&quot;ab:c&quot;</code>表示程序支持三个选项<code>-a</code>、<code>-b</code>和<code>-c</code>, 其中<code>-c</code>选项需要一个参数。</p>
+<h3 id="3-fscanf的用法"><a class="markdownIt-Anchor" href="#3-fscanf的用法"></a> 3. fscanf的用法</h3>
+<p><code>fscanf</code>是C语言标准库中的一个函数，它可以从一个文件中读取格式化数据，并将读取的结果存储到指定的变量中，该函数返回成功填充参数列表的项目数。<code>fscanf</code>函数的基本格式如下：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">fscanf</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>stream<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中，第一个参数<code>stream</code>是指向要读取数据的文件的指针；第二个参数<code>format</code>是一个字符串，用于指定读取数据的格式；第三个及之后的参数是要读取数据的变量名。<br />
+例如，如果你有一个文件<code>data.txt</code>，里面包含了三个整数，每个整数之间用空格分隔，你可以使用下面的代码将这些整数读取到三个变量<code>a</code>、<code>b</code>、<code>c</code>中</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    FILE <span class="token operator">*</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"data.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">;</span>
+    <span class="token function">fscanf</span><span class="token punctuation">(</span>fp<span class="token punctuation">,</span> <span class="token string">"%d %d %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">,</span> <span class="token operator">&amp;</span>b<span class="token punctuation">,</span> <span class="token operator">&amp;</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"a = %d, b = %d, c = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在上面的例子中，<code>fscanf</code>函数的第一个参数是文件指针<code>fp</code>，第二个参数是格式化字符串<code>&quot;%d %d %d&quot;</code>，它表示要读取三个整数，每个整数之间用空格分隔。第三个、第四个和第五个参数分别是三个整数变量<code>a</code>、<code>b</code>、<code>c</code>的地址，<code>fscanf</code>函数将读取到的整数存储到这些变量中。最后，我们打印出这些变量的值，以检查是否正确读取了文件中的数据。</p>
+<h3 id="4-编写程序"><a class="markdownIt-Anchor" href="#4-编写程序"></a> 4. 编写程序</h3>
+<p>这个实验不是真的让你去实现一个cache，而是让你编写一个能对访问记录进行应答的程序，这也是为什么writeup里强调所有的内存访问操作所需的块都不会超过行的容量</p>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/ea760dfad84e022b238df1bf264916b5.png" class="">
+<ol>
+<li>cache结构声明</li>
+</ol>
+<p>cache本质上是一个2D array，因此我们在结构体中声明一个指向二维数组的指针</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">cache_line</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> valid_bit<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> tag<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> time_stamp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>cache_line<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">cache</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> S<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> E<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> B<span class="token punctuation">;</span>
+	cache_line<span class="token operator">*</span><span class="token operator">*</span> Cache<span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span>cache<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>main</li>
+</ol>
+<p>主要在于正确解析命令行参数，会用<code>getopt</code>就行</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span> 	
+    <span class="token keyword">int</span>	hit_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> miss_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> eviction_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> s<span class="token punctuation">,</span> E<span class="token punctuation">,</span> b<span class="token punctuation">,</span>opt<span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> trace_name <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cache<span class="token operator">*</span> my_cache<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>opt <span class="token operator">=</span> <span class="token function">getopt</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"s:E:b:t:"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">switch</span><span class="token punctuation">(</span>opt<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">case</span> <span class="token char">'s'</span><span class="token operator">:</span>
+		   s <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>optarg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		   <span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token keyword">case</span> <span class="token char">'E'</span><span class="token operator">:</span>
+		   E <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>optarg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		   <span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token keyword">case</span> <span class="token char">'b'</span><span class="token operator">:</span>
+		   b <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>optarg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		   <span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token keyword">case</span> <span class="token char">'t'</span><span class="token operator">:</span>
+		   <span class="token function">strcpy</span><span class="token punctuation">(</span>trace_name<span class="token punctuation">,</span>optarg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		   <span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token keyword">case</span> <span class="token char">'?'</span><span class="token operator">:</span>
+		   <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"unknown option: %c\n"</span><span class="token punctuation">,</span>optopt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		   <span class="token keyword">break</span><span class="token punctuation">;</span>
+		   <span class="token punctuation">&#125;</span>
+     <span class="token punctuation">&#125;</span>
+     my_cache <span class="token operator">=</span> <span class="token function">construct_cache</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span>E<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token function">access_cache</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> s<span class="token punctuation">,</span> b<span class="token punctuation">,</span> trace_name<span class="token punctuation">,</span> <span class="token operator">&amp;</span>hit_count<span class="token punctuation">,</span> <span class="token operator">&amp;</span>miss_count<span class="token punctuation">,</span> <span class="token operator">&amp;</span>eviction_count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token function">free_cache</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token function">printSummary</span><span class="token punctuation">(</span>hit_count<span class="token punctuation">,</span> miss_count<span class="token punctuation">,</span> eviction_count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li>construct_cache</li>
+</ol>
+<p>根据输入的命令行参数<code>s</code>,<code>E</code>,<code>b</code>构造cache，并初始化每一个高速缓存行</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">cache<span class="token operator">*</span> <span class="token function">construct_cache</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> E<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    cache<span class="token operator">*</span> my_cache <span class="token operator">=</span><span class="token punctuation">(</span>cache<span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>cache<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// construct Cache</span>
+ my_cache<span class="token operator">-></span>S <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">;</span>
+ my_cache<span class="token operator">-></span>B <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> b<span class="token punctuation">;</span>
+ my_cache<span class="token operator">-></span>E <span class="token operator">=</span> E<span class="token punctuation">;</span>
+ my_cache<span class="token operator">-></span>Cache <span class="token operator">=</span> <span class="token punctuation">(</span>cache_line<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>my_cache<span class="token operator">-></span>S <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>cache_line<span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>my_cache<span class="token operator">-></span>S<span class="token punctuation">;</span><span class="token operator">++</span>i<span class="token punctuation">)</span>
+ <span class="token punctuation">&#123;</span>
+	my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>cache_line<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>my_cache<span class="token operator">-></span>E <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>cache_line<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>my_cache<span class="token operator">-></span>E<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token comment">// initialize</span>
+	<span class="token punctuation">&#123;</span>
+		my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>valid_bit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>tag <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+		my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>time_stamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">return</span> my_cache<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="4">
+<li>update_LRU</li>
+</ol>
+<p>我是通过对每个高速缓冲行维护一个time_stamp实现的LRU，因此更新Cache中各行的LRU操作很重要。对访问的行，time_stamp置0，有效位和tag位也要做更新，其余行的time_stamp加1</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">update_LRU</span><span class="token punctuation">(</span>cache<span class="token operator">*</span> my_cache<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_set<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_tag<span class="token punctuation">,</span> <span class="token keyword">int</span> line_index<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> my_cache<span class="token operator">-></span>E<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>valid_bit<span class="token punctuation">)</span> <span class="token operator">++</span><span class="token punctuation">(</span>my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>time_stamp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>line_index<span class="token punctuation">]</span><span class="token punctuation">.</span>time_stamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>line_index<span class="token punctuation">]</span><span class="token punctuation">.</span>valid_bit <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>line_index<span class="token punctuation">]</span><span class="token punctuation">.</span>tag <span class="token operator">=</span> ad_tag<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="5">
+<li>get_line_index</li>
+</ol>
+<p>每次访问cache，要得知hit，miss，eviction等信息，通过该函数实现：查找cache中所有行，如果找到有效位为1且tag位符合的行，则命中，否则miss</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">get_line_index</span><span class="token punctuation">(</span>cache<span class="token operator">*</span> my_cache<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_set<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_tag<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> my_cache<span class="token operator">-></span>E<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>valid_bit <span class="token operator">&amp;&amp;</span> my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>tag <span class="token operator">==</span> ad_tag<span class="token punctuation">)</span>
+			<span class="token keyword">return</span> i<span class="token punctuation">;</span>  <span class="token comment">// hit</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// miss</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="6">
+<li>is_not_full</li>
+</ol>
+<p>。进一步对miss，遍历cache所有行，如果找不到有效位为0的行，则说明cache is full，那么就额外涉及有eviction操作</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">is_not_full</span><span class="token punctuation">(</span>cache<span class="token operator">*</span> my_cache<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_set<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> my_cache<span class="token operator">-></span>E<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>valid_bit<span class="token punctuation">)</span> <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="7">
+<li>find_LRU</li>
+</ol>
+<p>对eviction操作，执行我们的LRU替换策略，先找到时间戳最大的行，再进行覆盖操作</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">find_LRU</span><span class="token punctuation">(</span>cache<span class="token operator">*</span> my_cache<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_set<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> max_stamp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> evict_line <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> my_cache<span class="token operator">-></span>E<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		temp <span class="token operator">=</span> my_cache<span class="token operator">-></span>Cache<span class="token punctuation">[</span>ad_set<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>time_stamp<span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>temp <span class="token operator">></span> max_stamp<span class="token punctuation">)</span>
+			<span class="token punctuation">&#123;</span>
+				max_stamp <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+				evict_line <span class="token operator">=</span> i<span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> evict_line<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="8">
+<li>access_cache</li>
+</ol>
+<p>我们需要用<code>fscanf</code>对数据访问操作进行解析，注意此处的<code>&quot; %c %x,%d&quot;</code>,<code>%c</code>前有一个whitespace，目的在于忽略对指令访问操作。由于不同数据访问指令执行的cache操作次数不同，因此我将对cache进行操作的部分分割成一个独立的函数<code>real_access_cache</code>。M等于L+S，因此需要两次更新。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">access_cache</span><span class="token punctuation">(</span>cache<span class="token operator">*</span> my_cache<span class="token punctuation">,</span> <span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> trace_name<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> hit_count_ptr<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> miss_count_ptr<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> eviction_count_ptr<span class="token punctuation">)</span>
+ <span class="token punctuation">&#123;</span>
+ 	 FILE<span class="token operator">*</span> pFile<span class="token punctuation">;</span>   <span class="token comment">// receive access</span>
+     pFile <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>trace_name<span class="token punctuation">,</span><span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>pFile<span class="token punctuation">)</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">char</span> identifier<span class="token punctuation">;</span>
+     <span class="token keyword">unsigned</span> address<span class="token punctuation">;</span>
+     <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+     <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">fscanf</span><span class="token punctuation">(</span>pFile<span class="token punctuation">,</span><span class="token string">" %c %x,%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>identifier<span class="token punctuation">,</span><span class="token operator">&amp;</span>address<span class="token punctuation">,</span><span class="token operator">&amp;</span>size<span class="token punctuation">)</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>
+     <span class="token punctuation">&#123;</span>     
+		<span class="token keyword">int</span> mask <span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">>></span><span class="token punctuation">(</span><span class="token number">64</span><span class="token operator">-</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">int</span> ad_set <span class="token operator">=</span> <span class="token punctuation">(</span>address <span class="token operator">>></span> b<span class="token punctuation">)</span> <span class="token operator">&amp;</span> mask<span class="token punctuation">;</span>
+		<span class="token keyword">int</span> ad_tag <span class="token operator">=</span> address <span class="token operator">>></span> <span class="token punctuation">(</span>s<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">switch</span><span class="token punctuation">(</span>identifier<span class="token punctuation">)</span>
+		<span class="token punctuation">&#123;</span>
+		<span class="token keyword">case</span> <span class="token char">'M'</span><span class="token operator">:</span>
+			<span class="token function">real_access_cache</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> hit_count_ptr<span class="token punctuation">,</span> miss_count_ptr<span class="token punctuation">,</span> eviction_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">real_access_cache</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> hit_count_ptr<span class="token punctuation">,</span> miss_count_ptr<span class="token punctuation">,</span> eviction_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token keyword">case</span> <span class="token char">'L'</span><span class="token operator">:</span>
+			<span class="token function">real_access_cache</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> hit_count_ptr<span class="token punctuation">,</span> miss_count_ptr<span class="token punctuation">,</span> eviction_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token keyword">case</span> <span class="token char">'S'</span><span class="token operator">:</span>
+			<span class="token function">real_access_cache</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> hit_count_ptr<span class="token punctuation">,</span> miss_count_ptr<span class="token punctuation">,</span> eviction_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token function">fclose</span><span class="token punctuation">(</span>pFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span>
+
+ <span class="token keyword">void</span> <span class="token function">real_access_cache</span><span class="token punctuation">(</span>cache<span class="token operator">*</span> my_cache<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_set<span class="token punctuation">,</span> <span class="token keyword">int</span> ad_tag<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> hit_count_ptr<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> miss_count_ptr<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> eviction_count_ptr<span class="token punctuation">)</span>
+ <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> line_index<span class="token punctuation">,</span>free_line<span class="token punctuation">,</span> evict_line<span class="token punctuation">;</span>
+	line_index <span class="token operator">=</span> <span class="token function">get_line_index</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>line_index <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token operator">++</span><span class="token punctuation">(</span><span class="token operator">*</span>hit_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">update_LRU</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> line_index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">else</span> 
+	<span class="token punctuation">&#123;</span>
+		free_line <span class="token operator">=</span> <span class="token function">is_not_full</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>free_line <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token operator">++</span><span class="token punctuation">(</span><span class="token operator">*</span>miss_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">update_LRU</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> free_line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+
+		<span class="token keyword">else</span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token operator">++</span><span class="token punctuation">(</span><span class="token operator">*</span>miss_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token operator">++</span><span class="token punctuation">(</span><span class="token operator">*</span>eviction_count_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			evict_line <span class="token operator">=</span> <span class="token function">find_LRU</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span>ad_set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">update_LRU</span><span class="token punctuation">(</span>my_cache<span class="token punctuation">,</span> ad_set<span class="token punctuation">,</span> ad_tag<span class="token punctuation">,</span> evict_line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		
+	<span class="token punctuation">&#125;</span>	
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-结果"><a class="markdownIt-Anchor" href="#5-结果"></a> 5. 结果</h3>
+<img src="/2023/03/06/CSAPP-Lab/CSAPP-LAB/f79658fdbb805322f1a6a578ef030add.png" class="">
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://elite-zx.github.io">Elite-X</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://elite-zx.github.io/2023/03/06/CSAPP-Lab/CSAPP-LAB/">https://elite-zx.github.io/2023/03/06/CSAPP-Lab/CSAPP-LAB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Foundation/">Foundation</a></div><div class="post_share"><div class="social-share" data-image="/img/cat.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/27/notes/ubuntu_mac/" title="ubuntu界面Mac化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">ubuntu界面Mac化</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/04/CSAPP-Lab/assembly/" title="汇编语言【王爽】实验流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">汇编语言【王爽】实验流程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/02/04/CSAPP-Lab/assembly/" title="汇编语言【王爽】实验流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-04</div><div class="title">汇编语言【王爽】实验流程</div></div></a></div><div><a href="/2023/05/31/computer-Network/CS144/" title="Stanford CS144 Spring 2023"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-31</div><div class="title">Stanford CS144 Spring 2023</div></div></a></div><div><a href="/2023/05/24/computer-Network/socket-programming/" title="[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs "><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs </div></div></a></div><div><a href="/2023/05/06/OS-Learning/HIT-OS-Labs/" title="[HIT-OS]哈工大操作系统实验lab1~8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">[HIT-OS]哈工大操作系统实验lab1~8</div></div></a></div><div><a href="/2023/05/06/OS-Learning/HIT-OS/" title="[HIT-OS]哈工大操作系统Notes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">[HIT-OS]哈工大操作系统Notes</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab1-datalab"><span class="toc-text"> lab1 dataLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90"><span class="toc-text"> 前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1bitxorxy"><span class="toc-text"> 1.bitXor(x,y)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2tmin"><span class="toc-text"> 2.tmin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3istmaxx"><span class="toc-text"> 3.isTmax(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4alloddbitsx"><span class="toc-text"> 4.allOddBits(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5isasciidigitx"><span class="toc-text"> 5.isAsciiDigit(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6conditional"><span class="toc-text"> 6.conditional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7islessorequalx-y"><span class="toc-text"> 7.isLessOrEqual(x, y)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8logicalnegx"><span class="toc-text"> 8.logicalNeg(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9howmanybitsx"><span class="toc-text"> 9.howManyBits(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10floatscale2uf"><span class="toc-text"> 10.floatScale2(uf)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11floatfloat2intuf"><span class="toc-text"> 11.floatFloat2Int(uf)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12floatpower2x"><span class="toc-text"> 12.floatPower2(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#consequence"><span class="toc-text"> consequence</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#-swig28-"><span class="toc-text"> </span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab2-bomblab"><span class="toc-text"> lab2 bombLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_1"><span class="toc-text"> phase_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_2"><span class="toc-text"> phase_2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_3"><span class="toc-text"> phase_3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_4"><span class="toc-text"> phase_4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_5"><span class="toc-text"> phase_5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_6"><span class="toc-text"> phase_6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secret_phase"><span class="toc-text"> secret_phase</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab3-attacklab"><span class="toc-text"> lab3 attacklab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90-2"><span class="toc-text"> 前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_1-2"><span class="toc-text"> phase_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_2-2"><span class="toc-text"> phase_2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_3-2"><span class="toc-text"> phase_3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase_4-2"><span class="toc-text"> phase_4</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab4-cachelab"><span class="toc-text"> lab4 cachelab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#parta"><span class="toc-text"> PartA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A6%81%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text"> 1. 要做什么：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-getopt%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-text"> 2. getopt函数的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-fscanf%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-text"> 3. fscanf的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F"><span class="toc-text"> 4. 编写程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BB%93%E6%9E%9C"><span class="toc-text"> 5. 结果</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Elite-X</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://unpkg.com/mathjax/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'e81d3036a2dbceba447b',
+      clientSecret: '4f031eb85eeebde1069ca0424a9660a810619614',
+      repo: 'Elite-zx.github.io',
+      owner: 'Elite-zx',
+      admin: ['Elite-zx'],
+      id: '979976ff3aa5507e2b686e0dfacfa480',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://unpkg.com/gitalk/dist/gitalk.css')
+    getScript('https://unpkg.com/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="https://unpkg.com/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
