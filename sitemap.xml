@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://elite-zx.github.io/2023/05/18/computer-Network/wireshark-lab/Wireshark-Lab/</loc>
+    <loc>https://elite-zx.github.io/2023/05/18/computer-Network/Wireshark-Lab/</loc>
     
     <lastmod>2023-06-29</lastmod>
     
@@ -140,13 +140,6 @@
   </url>
   
   <url>
-    <loc>https://elite-zx.github.io/categories/Operating-System/</loc>
-    <lastmod>2023-06-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://elite-zx.github.io/categories/gadget/</loc>
     <lastmod>2023-06-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -162,6 +155,13 @@
   
   <url>
     <loc>https://elite-zx.github.io/categories/Computer-Network/Computer-Network-ATopDownApproach/</loc>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/categories/Operating-System/</loc>
     <lastmod>2023-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

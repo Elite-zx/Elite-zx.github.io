@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP | ELITE-X's blog</title><meta name="author" content="Elite-X"><meta name="copyright" content="Elite-X"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lab1 Getting Start  用Wireshake捕获一个GET请求 ^6743fe  下载实验相关文件， linux下执行apt install wireshark下载 参照指导书，下载Wireshake软件，这个软件可以捕获计算机发出或接受的数据包(package，其实主要是捕获链路层(link layer)的帧(frame)，因为该数据帧封装(encapsulate)了所有的上层">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP | ELITE-X's blog</title><meta name="author" content="Elite-X"><meta name="copyright" content="Elite-X"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lab1 Getting Start  用Wireshake捕获一个GET请求  下载实验相关文件， linux下执行apt install wireshark下载 参照指导书，下载Wireshake软件，这个软件可以捕获计算机发出或接受的数据包(package，其实主要是捕获链路层(link layer)的帧(frame)，因为该数据帧封装(encapsulate)了所有的上层协议)    选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP">
-<meta property="og:url" content="https://elite-zx.github.io/2023/05/18/computer-Network/wireshark-lab/Wireshark-Lab/index.html">
+<meta property="og:url" content="https://elite-zx.github.io/2023/05/18/computer-Network/Wireshark-Lab/index.html">
 <meta property="og:site_name" content="ELITE-X&#39;s blog">
-<meta property="og:description" content="lab1 Getting Start  用Wireshake捕获一个GET请求 ^6743fe  下载实验相关文件， linux下执行apt install wireshark下载 参照指导书，下载Wireshake软件，这个软件可以捕获计算机发出或接受的数据包(package，其实主要是捕获链路层(link layer)的帧(frame)，因为该数据帧封装(encapsulate)了所有的上层">
+<meta property="og:description" content="lab1 Getting Start  用Wireshake捕获一个GET请求  下载实验相关文件， linux下执行apt install wireshark下载 参照指导书，下载Wireshake软件，这个软件可以捕获计算机发出或接受的数据包(package，其实主要是捕获链路层(link layer)的帧(frame)，因为该数据帧封装(encapsulate)了所有的上层协议)    选">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://elite-zx.github.io/img/cat.jpg">
 <meta property="article:published_time" content="2023-05-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-29T10:58:59.442Z">
+<meta property="article:modified_time" content="2023-06-29T13:18:59.227Z">
 <meta property="article:author" content="Elite-X">
 <meta property="article:tag" content="Foundation">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://elite-zx.github.io/img/cat.jpg"><link rel="shortcut icon" href="/img/linux.ico"><link rel="canonical" href="https://elite-zx.github.io/2023/05/18/computer-Network/wireshark-lab/Wireshark-Lab/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="0V6rot-q_o_MYoihQQBB9P3yjYfncWGfFpAD6Ejlv84"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://elite-zx.github.io/img/cat.jpg"><link rel="shortcut icon" href="/img/linux.ico"><link rel="canonical" href="https://elite-zx.github.io/2023/05/18/computer-Network/Wireshark-Lab/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="0V6rot-q_o_MYoihQQBB9P3yjYfncWGfFpAD6Ejlv84"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-29 18:58:59'
+  postUpdate: '2023-06-29 21:18:59'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -188,18 +188,18 @@ if (false) {
 document.addEventListener('pjax:send', () => {
   Pace.restart()
 })
-</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://unpkg.com/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/cat.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="ELITE-X's blog"><span class="site-name">ELITE-X's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-17T16:00:00.000Z" title="Created 2023-05-18 00:00:00">2023-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-06-29T10:58:59.442Z" title="Updated 2023-06-29 18:58:59">2023-06-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Computer-Network/">Computer Network</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lab1-getting-start"><a class="markdownIt-Anchor" href="#lab1-getting-start"></a> lab1 Getting Start</h1>
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://unpkg.com/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/cat.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="ELITE-X's blog"><span class="site-name">ELITE-X's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-17T16:00:00.000Z" title="Created 2023-05-18 00:00:00">2023-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-06-29T13:18:59.227Z" title="Updated 2023-06-29 21:18:59">2023-06-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Computer-Network/">Computer Network</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lab1-getting-start"><a class="markdownIt-Anchor" href="#lab1-getting-start"></a> lab1 Getting Start</h1>
 <hr />
-<p>用Wireshake捕获一个GET请求 ^6743fe</p>
+<p>用Wireshake捕获一个GET请求</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://gaia.cs.umass.edu/kurose_ross/wireshark.php">下载实验相关文件</a>， linux下执行<code>apt install wireshark</code>下载</li>
 <li>参照指导书，<a target="_blank" rel="noopener" href="http://www.wireshark.org/download.html">下载Wireshake软件</a>，这个软件可以捕获计算机发出或接受的数据包(package，其实主要是捕获链路层(link layer)的帧(frame)，因为该数据帧封装(encapsulate)了所有的上层协议)</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/3d5e07ff2b79d828f655330fc825c1aa.png" class="">
 <ol start="3">
 <li>选择Wlan接口(wireless local-area network,这里指wifi)，linux下选择wlp1s0接口，开启捕获</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/56d0df67832e9b065fa3bb5688434bce.png" class="">
 <ol start="5">
 <li>访问<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html">这个网站</a>以发出get请求，Wireshake会捕获这个HTTP信息</li>
 </ol>
@@ -208,7 +208,7 @@ document.addEventListener('pjax:send', () => {
 <li>关闭VPN</li>
 <li>访问目标网站后，清除浏览器缓存可再次抓包</li>
 </ol>
-从上图，我们得到以下信息：
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/f7a09801408174b57e47f37bd497536b.png" class="">从上图，我们得到以下信息：
 <ol>
 <li>我在<code>21:02:28.468029</code>时发出了GET请求，在<code>21:02:28.735677</code>时收到了服务器的HTTP OK 回复</li>
 <li>我电脑(source)是IP地址为192.168.0.105, 服务器(Destination)IP地址为128.119.245.12</li>
@@ -217,90 +217,90 @@ document.addEventListener('pjax:send', () => {
 <hr />
 <h2 id="21-the-basic-http-getresponse-interaction"><a class="markdownIt-Anchor" href="#21-the-basic-http-getresponse-interaction"></a> 2.1. The Basic HTTP GET/response interaction</h2>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9666fb87f7a0dd831d9a7bca04892e8a.png" class="">
 <ol>
 <li>Is your browser running HTTP version 1.0 or 1.1? What version of HTTP is the server running?<br />
 <strong>browser: HTTP1.1</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/74ff7bd33f836d0acfa4276f50feee09.png" class="">
 <p><strong>server:  HTTP1.1</strong></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/fa49d3d6e62886ab35141cf7e7f3e5af.png" class="">
 <ol start="2">
 <li>What languages (if any) does your browser indicate that it can accept to the server?<br />
 <strong>chinese</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/842f4806947e906f83fd4acc50af9f51.png" class="">
 <ol start="3">
 <li>What is the IP address of your computer? Of the <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> server?<br />
 <strong>my computer:</strong> <code>10.20.102.167</code><br />
 <strong>server:</strong> <code>128.119.245.12</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9a3242ad03c199e72f7d221c08994a6b.png" class="">
 <ol start="4">
 <li>What is the status code returned from the server to your browser?<br />
 <strong>status code: 200,  means successfully request , message is in the respond</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/1f07d403d9d7330c6c04465997fd798b.png" class="">
 <ol start="5">
 <li>When was the HTML file that you are retrieving last modified at the server?</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/b9f0939d8a0e33b59dade13167db4e4e.png" class="">
 <ol start="6">
 <li>How many bytes of content are being returned to your browser?<br />
 <strong>128 bytes</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/637e7b755bab8e8f5b71201efa82c9d3.png" class="">
 <ol start="7">
 <li>By inspecting the raw data in the packet content window, do you see any headers within the data that are not displayed in the packet-listing window? If so, name one.<br />
 <strong>no</strong></li>
 </ol>
 <h2 id="22-the-http-conditional-getresponse-interaction"><a class="markdownIt-Anchor" href="#22-the-http-conditional-getresponse-interaction"></a> 2.2. The HTTP CONDITIONAL GET/response interaction</h2>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/6bc81b701953085c84dd3d0cfcaf7adc.png" class="">
 <ol>
 <li>Inspect the contents of the first HTTP GET request from your browser to the server. Do you see an “IF-MODIFIED-SINCE” line in the HTTP GET?<br />
 <strong>no</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/149774fceefd1466354244ddcd2e07bb.png" class="">
 <ol start="2">
 <li>Inspect the contents of the server response. Did the server explicitly return the contents of the file? How can you tell?<br />
 <strong>yes， there is a text data (entity body) behind headers</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/95ba9324691fcd33a45215c5013ca557.png" class="">
 <ol start="3">
 <li>Now inspect the contents of the second HTTP GET request from your browser to the server. Do you see an “IF-MODIFIED-SINCE:” line in the HTTP GET? If so, what information follows the “IF-MODIFIED-SINCE:” header?<br />
 <strong>yes, information as follows</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/2658e61ad8f0214c3c33410e804e9424.png" class="">
 <ol start="4">
 <li>What is the HTTP status code and phrase returned from the server in response to this second HTTP GET? Did the server explicitly return the contents of the file? Explain.<br />
 <strong>status code and phrase: 304 Not Modified<br />
 no contents behind headers, since proxy server not need to be updated</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/f5d69cafff5ca0c8d0402b00b8dc1711.png" class="">
 <h2 id="23-retrieving-long-documents"><a class="markdownIt-Anchor" href="#23-retrieving-long-documents"></a> 2.3. Retrieving Long Documents</h2>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/58b6db613551816ee63b829af32ba6dc.png" class="">
 <ol>
 <li>How many HTTP GET request messages did your browser send? Which packet number in the trace contains the GET message for the Bill or Rights?<br />
 <strong>send 1 GET request messages in 10 seconds,  packet number is</strong> <code>76</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/ca6a50229ee3bc3d9426e57e5d6459a9.png" class="">
 <ol start="2">
 <li>Which packet number in the trace contains the status code and phrase associated with the response to the HTTP GET request?<br />
 <strong>still</strong> <code>76</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/43293ec4eb828ae71c6b6d63da7d3911.png" class="">
 <ol start="3">
 <li>What is the status code and phrase in the response?<br />
 <strong>200 OK</strong></li>
 <li>How many data-containing TCP segments were needed to carry the single HTTP response and the text of the Bill of Rights?<br />
 <strong>1,  there is no</strong> <code>TCP segment of a reassembled PDU</code> **info display,  i reckon that it is a version problem of wireshark  **</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/e9209e0078dd14c5a5d023e87835a706.png" class="">
 <h2 id="24-html-documents-with-embedded-objects"><a class="markdownIt-Anchor" href="#24-html-documents-with-embedded-objects"></a> 2.4. HTML Documents with Embedded Objects</h2>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/c3a4468b8814c0953d31dd4fdac5d636.png" class="">
 <ol>
 <li>How many HTTP GET request messages did your browser send? To which Internet addresses were these GET requests sent?<br />
 three<br />
@@ -308,24 +308,24 @@ three<br />
 <code>128.119.245.12</code><br />
 <code>178.79.137.164</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9f268b8b2a79e7b190d5397e26452625.png" class="">
 <ol start="2">
 <li>Can you tell whether your browser downloaded the two images serially, or whether they were downloaded from the two web sites in parallel? Explain.<br />
 <strong>serially, since the GET request send after another GET request getting it’s response</strong></li>
 </ol>
 <h2 id="25-http-authentication"><a class="markdownIt-Anchor" href="#25-http-authentication"></a> 2.5. HTTP Authentication</h2>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/c0c297abba0275127407015d65925f9a.png" class="">
 <ol>
 <li>What is the server’s response (status code and phrase) in response to the initial HTTP GET message from your browser?<br />
 <strong>401 Unauthorized</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/5a5a814fcc627d10d2c8e696ae987851.png" class="">
 <ol start="2">
 <li>When your browser’s sends the HTTP GET message for the second time, what new field is included in the HTTP GET message?<br />
 <strong>Authorization field</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/427ef940a795485dff92bf1917b75247.png" class="">
 <h1 id="lab3-dns"><a class="markdownIt-Anchor" href="#lab3-dns"></a> lab3 DNS</h1>
 <hr />
 <h2 id="31-nslookup"><a class="markdownIt-Anchor" href="#31-nslookup"></a> 3.1. nslookup</h2>
@@ -333,17 +333,17 @@ three<br />
 <li>Run nslookup to obtain the IP address of a Web server in Asia. What is the IP address of that server?<br />
 <strong>IPV4 address: <code>166.111.4.100</code> from DNS Cache</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/e62cbbd0a91c3a96402eb1f2569529e3.png" class="">
 <ol start="2">
 <li>Run nslookup to determine the authoritative DNS servers for a university in Europe.<br />
 <strong>four imperial college london nameservers</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/61a82f3a51e3c9b11b5c3189b9ec729f.png" class="">
 <h2 id="32-ifconfig"><a class="markdownIt-Anchor" href="#32-ifconfig"></a> 3.2. ifconfig</h2>
 <p>Ubuntu上尽可能等效windows上的<code>ipconfig /displaydns</code> 的命令应该是<code>resolvectl statistics</code> ,这个命令会显示一些统计数据，包括当前缓存的条目数量、缓存命中次数、缓存未命中次数等。由于安全和隐私的考虑，<code>resolvectl</code> 并不提供直接查看全部DNS缓存条目的功能。</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9358c4d071208b5800550371a9d012c6.png" class="">
 <p>使用<code>resolvectl flush-caches</code>清除本机的DNS缓存，再次用<code>resolvectl statistics</code>查看DNS缓存条目数量，此时变为0</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/cd4ed10ba0739b982bcdb68ba7fef486.png" class="">
 <blockquote>
 <p><code>resolvectl</code> ,旧名<code>systemd-resolved</code> ，是一个由 systemd 提供的网络名称解析服务，它在 Ubuntu 和其他使用 systemd 的 Linux 发行版上运行。<strong>它负责 DNS 解析和缓存</strong>，mDNS（多播 DNS）解析，LLMNR（链接本地多播名称解析）和 DNSSEC（DNS 安全扩展）验证等功能。<br />
 <code>resolvectl</code> 将 DNS 查询结果存储在缓存中，以便在以后进行相同的查询时，可以直接从缓存中获取结果，而不必再次查询远程的 DNS 服务器。这可以显著提高 DNS 解析的速度，尤其是对于经常被查询的名称。<br />
@@ -354,49 +354,49 @@ three<br />
 <li>它可以处理多个网络接口和多个 DNS 服务器，并可以为每个接口单独配置 DNS 服务器。<br />
 总的来说，<code>resolvectl</code> 是一个强大的网络名称解析服务，它提供了许多现代的和有用的功能。</li>
 </ul>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/4d24df9ed9540e0dbf4cad215c7c49a7.png" class="">
 </blockquote>
 <h2 id="33-tracing-dns-with-wireshark"><a class="markdownIt-Anchor" href="#33-tracing-dns-with-wireshark"></a> 3.3. Tracing DNS with Wireshark</h2>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/1270098e483482721bdf5c2970415ff4.png" class="">
 <ol>
 <li>Locate the DNS query and response messages. Are then sent over UDP or TCP?<br />
 <strong>UDP， 这也符合教材所说的</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/18a7a3a7184a7217316f50aa2123a124.png" class="">
 <p><strong>DNS query:</strong></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/ac534dc1568f877100b753268ef4a5de.png" class="">
 <p><strong>DNS response:</strong></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/7715511eac6a247bee50665eea56c507.png" class="">
 <ol start="2">
 <li>What is the destination port for the DNS query message? What is the source port of DNS response message?<br />
 <strong>Dst Port of query: 53</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/c1cb87b6652765931391337df1908dee.png" class="">
 <p><strong>Src Port of response: 53</strong></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9b74161004a82931688b005e4b535e6c.png" class="">
 <ol start="3">
 <li>To what IP address is the DNS query message sent? Use ipconfig to determine the IP address of your local DNS server. Are these two IP addresses the same?<br />
 <strong>linux下使用<code>resolvectl</code>获取当前的本地DNS服务器的IP地址</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/65fab6a2d77fcc66c7a34f5904812d30.png" class="">
 <p><strong>这与DNS query发送的目的地一致</strong></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/1126bb1565533f880328c9c9147c73f9.png" class="">
 <ol start="4">
 <li>Examine the DNS query message. What “Type” of DNS query is it? Does the query message contain any “answers”?<br />
 <strong>type A , no answers in query message</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9aa2c31c143fddc15f2a009098dd8235.png" class="">
 <ol start="5">
 <li>Examine the DNS response message. How many “answers” are provided? What do each of these answers contain?<br />
 <strong>3个答案，分别是规范主机名，2条目的ip地址</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/36e84166025c5972a275f8fd9524a615.png" class="">
 <ol start="6">
 <li>Consider the subsequent TCP SYN packet sent by your host. Does the destination IP address of the SYN packet correspond to any of the IP addresses provided in the DNS response message?<br />
 <strong>yes，</strong><code>104.16.45.99</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/c37a042f10d88979fd8f0fa2ff0329ff.png" class="">
 <ol start="7">
 <li>This web page contains images. Before retrieving each image, does your host issue new DNS queries?<br />
 <strong>the images are all loaded from <a target="_blank" rel="noopener" href="http://www.ietf.org">www.ietf.org</a>, no DNS queries after initial query, since the DNS have cached in host. Note that application layer protocol is https here, so no http message shown in wireshark list window instead of TLS message</strong></li>
@@ -407,68 +407,68 @@ HTTPS代表着在TLS上的HTTP，因此除非您拥有将TLS解密为明文所�
 </blockquote>
 <h2 id="34-play-with-nslookup"><a class="markdownIt-Anchor" href="#34-play-with-nslookup"></a> 3.4. play with nslookup</h2>
 <h3 id="341-nslookup-mitedu"><a class="markdownIt-Anchor" href="#341-nslookup-mitedu"></a> 3.4.1 nslookup <a target="_blank" rel="noopener" href="http://mit.edu">mit.edu</a></h3>
-<p>捕获成功</p>
-
-
+<p>捕获成功<img src="/2023/05/18/computer-Network/Wireshark-Lab/9dd3deb8326013386c8cc05127cb0744.png" class=""></p>
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/9dd3deb8326013386c8cc05127cb0744.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/2fe4d6113c900392f724168b4a4ddb54.png" class="">
 <ol>
 <li>What is the destination port for the DNS query message? What is the source port of DNS response message?<br />
 <strong>Dst port of query:</strong> <code>53</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/d246e10c4c912a73cbbcff353ff8ceff.png" class="">
 <p><strong>Src port of response:</strong><code>53</code></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/85c0a47000aaa941495f8b65d3232121.png" class="">
 <ol start="2">
 <li>To what IP address is the DNS query message sent? Is this the IP address of your default local DNS server?<br />
 <strong>yes</strong></li>
 </ol>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/68175fa176706e454785d1d995728f03.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/4de124ba3447e44694843e5e138e9495.png" class="">
 <ol start="3">
 <li>Examine the DNS query message. What “Type” of DNS query is it? Does the query message contain any “answers”?<br />
 <strong>A, no answer</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/feb20a80649c41636296dd228066dc01.png" class="">
 <ol start="4">
 <li>Examine the DNS response message. How many “answers” are provided? What do each of these answers contain?<br />
 <strong>one,  an ip address, which is correspond to the answer of nslookup</strong></li>
 </ol>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/6ba62f4eef87cc3093618c6611defb2c.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/4b504754eaef441797f928b55881e608.png" class="">
 <ol start="5">
 <li>Provide a screenshot.</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/50500f96b7771c4f99bd333520855246.png" class="">
 <h3 id="342-nslookup-typens-mitedu"><a class="markdownIt-Anchor" href="#342-nslookup-typens-mitedu"></a> 3.4.2 nslookup –type=NS <a target="_blank" rel="noopener" href="http://mit.edu">mit.edu</a></h3>
 <p>捕获成功</p>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/095d7009a83990429d8c1e2e4608f861.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/b4e2bdc07ef90ac60bd86dc27081ab1f.png" class="">
 <ol>
 <li>To what IP address is the DNS query message sent? Is this the IP address of your default local DNS server?<br />
 <strong>yes,</strong> <code>202.202.32.34</code></li>
 <li>Examine the DNS query message. What “Type” of DNS query is it? Does the query message contain any “answers”?<br />
 <strong>NS， no answers</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/4988f28953c0e73d99679b2be88ced2a.png" class="">
 <ol start="3">
 <li>Examine the DNS response message. What MIT nameservers does the response message provide? Does this response message also provide the IP addresses of the MIT namesers?<br />
 <strong>Exactly as listed by nslookup, even in the same order. no IP address in response</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/a16d60d7adde4a2870e03d21bed54bbf.png" class="">
 <ol start="4">
 <li>Provide a screenshot.</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/d8b6c5a6326ae3de494e671ba7a43364.png" class="">
 <h1 id="lab4-udp"><a class="markdownIt-Anchor" href="#lab4-udp"></a> lab4 UDP</h1>
 <ol>
 <li>Select one UDP packet from your trace. From this packet, determine how many fields there are in the UDP header. (You shouldn’t look in the textbook! Answer these questions directly from what you observe in the packet trace.) Name these fields.<br />
 <strong>4 fields : 源端口号src port number，目标端口号dst port number，报文段长度 length，检验和 checkSum</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/0a9ca8f0fc91c09d8b35a6a4a3a5560f.png" class="">
 <ol start="2">
 <li>By consulting the displayed information in Wireshark’s packet content field for this packet, determine the length (in bytes) of each of the UDP header fields<br />
 <strong>Length - data part length (UDP payload)    = 8bytes, each of header fields have 2 bytes</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/482b48a820c86580578b0eac9084ee97.png" class="">
 <ol start="3">
 <li>The value in the Length field is the length of what? (You can consult the text for this answer). Verify your claim with your captured UDP packet.<br />
 <strong>header  + data part</strong></li>
@@ -479,39 +479,39 @@ HTTPS代表着在TLS上的HTTP，因此除非您拥有将TLS解密为明文所�
 <li>What is the protocol number for UDP? Give your answer in both hexadecimal and decimal notation. To answer this question, you’ll need to look into the Protocol field of the IP datagram containing this UDP segment (see Figure 4.13 in the text, and the discussion of IP header fields).<br />
 <strong>17</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/8102ab429aaf7a1f6611f291fcc71c7b.png" class="">
 <ol start="7">
 <li>Examine a pair of UDP packets in which your host sends the first UDP packet and the second UDP packet is a reply to this first UDP packet. (Hint: for a second packet to be sent in response to a first packet, the sender of the first packet should be the destination of the second packet). Describe the relationship between the port numbers in the two packets.<br />
 <strong>the first UDP package of sender</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/30e8d3626c0befbb49d8d2d0b56ba8a0.png" class="">
 <p><strong>the second UDP package of  receiver</strong></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/f759720a0f21cea84056024ae6a07738.png" class="">
 <p><strong>The sending port and receiving port of the sender and receiver are exactly the opposite</strong></p>
 <h1 id="lab5-tcp"><a class="markdownIt-Anchor" href="#lab5-tcp"></a> lab5 TCP</h1>
 <p>捕获成功</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/f7c02b9e59c5a0d2791952aa5b9fc365.png" class="">
 <h2 id="51-a-first-look-at-the-captured-trace"><a class="markdownIt-Anchor" href="#51-a-first-look-at-the-captured-trace"></a> 5.1 A first look at the captured trace</h2>
 <ol>
 <li>What is the IP address and TCP port number used by the client computer (source) that is transferring the file to <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a>?<br />
 <strong>src port: 45280,  dst port: 80</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/314920be8b5b765ccd96825ec1b747e5.png" class="">
 <ol start="2">
 <li>What is the IP address of <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a>? On what port number is it sending and receiving TCP segments for this connection?<br />
 <strong>ip address:</strong> <code>128.119.245.12</code><br />
 <strong>sending port number:</strong> <code>80</code><br />
 <strong>receiving port number:</strong> <code>80</code>, as well as sending port number</li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/60f15eea640ac29efe9e991e184d7ddd.png" class="">
 <h2 id="52-tcp-basics"><a class="markdownIt-Anchor" href="#52-tcp-basics"></a> 5.2 TCP Basics</h2>
 <ol>
 <li>What is the sequence number of the TCP SYN segment that is used to initiate the TCP connection between the client computer and <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a>? What is it in the segment that identifies the segment as a SYN segment?<br />
 <strong>sequence number: 0</strong><br />
 <strong>flag field of the segment identifies the segment is a SYN segment</strong></li>
 </ol>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/94f0c60ba00e0a890b33bf10f57a3068.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/503f32fc757e7476c881954fc7faaf9c.png" class="">
 <ol start="2">
 <li>What is the sequence number of the SYNACK segment sent by <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> to the client computer in reply to the SYN? What is the value of the Acknowledgement field in the SYNACK segment? How did <a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu">gaia.cs.umass.edu</a> determine that value? What is it in the segment that identifies the segment as a SYNACK segment?</li>
 </ol>
@@ -521,19 +521,19 @@ HTTPS代表着在TLS上的HTTP，因此除非您拥有将TLS解密为明文所�
 <li><strong>确认字段的值是主机期望从对方收到的下一个字节的序号，在没有双方没有发送任何数据之前，双方的确认字段只能填入对方的第一个字节的序号，因此我主机发出的SYN在确认字段填入的是0，而对方主机发送的SYNACK是1（已接受我主机发出的序号为0的字节）</strong></li>
 <li><strong>flag field</strong></li>
 </ul>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/eae8f329d5a6c5f67bcc5b9eb29bbeb3.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/2c53606f07fab98c6916bbba85377521.png" class="">
 <ol start="3">
 <li>What is the sequence number of the TCP segment containing the HTTP POST command? Note that in order to find the POST command, you’ll need to dig into the packet content field at the bottom of the Wireshark window, looking for a segment with a “POST” within its DATA field.1<br />
 <strong>sequence number:</strong> 1<br />
 <strong>此时从我主机发出的HTTP顺带第3次握手的ACK信息，因此是下一个字节1</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/3ea02b30cb660b4112d358a7e4f44504.png" class="">
 <ol start="4">
 <li>Consider the TCP segment containing the HTTP POST as the first segment in the TCP connection. What are the sequence numbers of the first six segments in the TCP connection (including the segment containing the HTTP POST)? At what time was each segment sent? When was the ACK for each segment received? Given the difference between when each TCP segment was sent, and when its acknowledgement was received, what is the RTT value for each of the six segments? What is the EstimatedRTT value (see Section 3.5.3, page 242 in text) after the receipt of each ACK? Assume that the value of the EstimatedRTT is equal to the measured RTT for the first segment, and then is computed using the EstimatedRTT equation on page 242 for all subsequent segments.<br />
 <strong>这是是重新捕获了，因此发送端口从</strong><code>45240</code><strong>变成了</strong><code>48774</code></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/8e43393a777274966c8cac1fa50519f7.png" class="">
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>∗</mo><mi>E</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>+</mo><mi>α</mi><mo>∗</mo><mi>R</mi><mi>T</mi><mi>T</mi><mo stretchy="false">(</mo><mi>α</mi><mo>=</mo><mn>0.125</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">EstimatedRTT = (1-\alpha)*EstimatedRTT +\alpha * RTT (\alpha = 0.125)
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">m</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">m</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">1</span><span class="mord">2</span><span class="mord">5</span><span class="mclose">)</span></span></span></span></span></p>
 <table>
@@ -593,8 +593,8 @@ HTTPS代表着在TLS上的HTTP，因此除非您拥有将TLS解密为明文所�
 </table>
 <p>这里只拿一对发送-响应的截图来说明：<br />
 <strong>发送segment1, 下一个字节序号为708, 因此接受方反馈的信息中确认字段应该填入708</strong></p>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/875283c601c34f76111ca7b635f008bb.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/b4571a214c8a775e27e11c06e9f1d708.png" class="">
 <ol start="6">
 <li>What is the length of each of the first six TCP segments?</li>
 </ol>
@@ -641,29 +641,28 @@ HTTPS代表着在TLS上的HTTP，因此除非您拥有将TLS解密为明文所�
 <p>当连接建立后，TCP 会通过观察网络的反馈（如接收端的 ACK，网络的延迟和丢包情况等）来动态调整窗口大小，这就是 TCP 的拥塞控制机制。如果网络条件良好，窗口会逐步增大，以提高传输效率。如果出现网络拥塞（如丢包），窗口会减小，以降低发送速率，避免拥塞的进一步发生。</p>
 <p>所以，TCP 连接刚建立的时候，窗口大小被设置得较小，主要是为了避免对未知网络条件的盲目冒进，防止过早导致网络拥塞，同时也为后续的窗口动态调整留下空间。</p>
 </blockquote>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/43efb35d73de5a049bcde442827ed4d3.png" class="">
 <p><strong>接受窗口的大小远大于单个segment(1448 bytes), 并且随着发送的进行还在不断变大， 因此发送方没有因为接受窗口大小而抑制发送速率</strong><br />
 9. Are there any retransmitted segments in the trace file? What did you check for (in the trace) in order to answer this question?<br />
 <strong>no retransimtted segments, the sequence of The sequence number of the segment sent by the sender is always incremented</strong>,<br />
 <strong>这里是重新捕获后的截图，端口变为</strong><code>45802</code></p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/d8ef1ee754a2556fbce31f6bf8329a91.png" class="">
 <ol start="10">
 <li>How much data does the receiver typically acknowledge in an ACK? Can you identify cases where the receiver is ACKing every other received segment u(每隔一个收到的段)(see Table 3.2 on page 250 in the text).<br />
 <strong>两个连续的反馈信息中的ACK字段之差就表示了一个ACK确定的数据量，可以看到这里是</strong><code>1448</code><br />
 <strong>下图中也存在这样的情况<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9396</mn><mo>−</mo><mn>6500</mn><mo>=</mo><mn>2896</mn></mrow><annotation encoding="application/x-tex">9396 - 6500 = 2896</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">9</span><span class="mord">3</span><span class="mord">9</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span><span class="mord">5</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">8</span><span class="mord">9</span><span class="mord">6</span></span></span></span> , 这种就是间隔发送ACK的情况(case)</strong></li>
 </ol>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/107b718dc0d1f7cc9f60dffd947e6e1c.png" class="">
 <ol start="11">
 <li>What is the throughput (bytes transferred per unit time) for the TCP connection? Explain how you calculated this value.<br />
 <strong>通过第一个TCP数据段的序列号和最后一个确认的序列号之间的差来计算发送的总数据量</strong></li>
 </ol>
-
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/e609d43b347ced7d0cd0c3e4a0a97c54.png" class="">
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/de7325161e37955a8f2d9bbf2cd4b5b7.png" class="">
 <p>**因此总数据量为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1696891</mn><mo>−</mo><mn>1</mn><mo>=</mo><mn>1696890</mn></mrow><annotation encoding="application/x-tex">1696891 - 1 = 1696890</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mord">9</span><span class="mord">6</span><span class="mord">8</span><span class="mord">9</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mord">9</span><span class="mord">6</span><span class="mord">8</span><span class="mord">9</span><span class="mord">0</span></span></span></span> （头部信息加上文件数据），这很符合文件的大小</p>
-
+<img src="/2023/05/18/computer-Network/Wireshark-Lab/2aeda677c398c1c2a738e9662a8fd7a7.png" class="">
 <p>除去这期间的时间就可得到单位时间**<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>14.24178</mn><mo>−</mo><mn>8.65656</mn><mo>=</mo><mn>5.58522</mn></mrow><annotation encoding="application/x-tex">14.24178 -8.65656 = 5.58522</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">4</span><span class="mord">.</span><span class="mord">2</span><span class="mord">4</span><span class="mord">1</span><span class="mord">7</span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mord">.</span><span class="mord">6</span><span class="mord">5</span><span class="mord">6</span><span class="mord">5</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">.</span><span class="mord">5</span><span class="mord">8</span><span class="mord">5</span><span class="mord">2</span><span class="mord">2</span></span></span></span><strong>的吞吐量</strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1696890</mn><mi mathvariant="normal">/</mi><mn>5.58522</mn><mo>=</mo><mn>303</mn><mo separator="true">,</mo><mn>817.93376</mn></mrow><annotation encoding="application/x-tex">1696890/5.58522 = 303,817.93376</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mord">9</span><span class="mord">6</span><span class="mord">8</span><span class="mord">9</span><span class="mord">0</span><span class="mord">/</span><span class="mord">5</span><span class="mord">.</span><span class="mord">5</span><span class="mord">8</span><span class="mord">5</span><span class="mord">2</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">8</span><span class="mord">1</span><span class="mord">7</span><span class="mord">.</span><span class="mord">9</span><span class="mord">3</span><span class="mord">3</span><span class="mord">7</span><span class="mord">6</span></span></span></span> ， <strong>即303kB/s (not KB)</strong></p>
-<h2 id="53-tcp-congestion-control-in-action"><a class="markdownIt-Anchor" href="#53-tcp-congestion-control-in-action"></a> 5.3. TCP congestion control in action</h2>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://elite-zx.github.io">Elite-X</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://elite-zx.github.io/2023/05/18/computer-Network/wireshark-lab/Wireshark-Lab/">https://elite-zx.github.io/2023/05/18/computer-Network/wireshark-lab/Wireshark-Lab/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Foundation/">Foundation</a></div><div class="post_share"><div class="social-share" data-image="/img/cat.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/24/computer-Network/socket-programming/" title="[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs "><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs </div></div></a></div><div class="next-post pull-right"><a href="/2023/05/06/OS-Learning/HIT-OS-Labs/" title="[HIT-OS]哈工大操作系统实验lab1~8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">[HIT-OS]哈工大操作系统实验lab1~8</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/03/06/CSAPP-Lab/CSAPP-LAB/" title="CMU CS15213: CSAPP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-06</div><div class="title">CMU CS15213: CSAPP</div></div></a></div><div><a href="/2023/02/04/CSAPP-Lab/assembly/" title="汇编语言【王爽】实验流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-04</div><div class="title">汇编语言【王爽】实验流程</div></div></a></div><div><a href="/2023/05/31/computer-Network/CS144/" title="Stanford CS144 Spring 2023"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-31</div><div class="title">Stanford CS144 Spring 2023</div></div></a></div><div><a href="/2023/05/06/OS-Learning/HIT-OS-Labs/" title="[HIT-OS]哈工大操作系统实验lab1~8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">[HIT-OS]哈工大操作系统实验lab1~8</div></div></a></div><div><a href="/2023/05/24/computer-Network/socket-programming/" title="[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs "><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs </div></div></a></div><div><a href="/2023/05/06/OS-Learning/HIT-OS/" title="[HIT-OS]哈工大操作系统Notes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">[HIT-OS]哈工大操作系统Notes</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab1-getting-start"><span class="toc-text"> lab1 Getting Start</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab2-http"><span class="toc-text"> lab2 HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#21-the-basic-http-getresponse-interaction"><span class="toc-text"> 2.1. The Basic HTTP GET&#x2F;response interaction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-the-http-conditional-getresponse-interaction"><span class="toc-text"> 2.2. The HTTP CONDITIONAL GET&#x2F;response interaction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-retrieving-long-documents"><span class="toc-text"> 2.3. Retrieving Long Documents</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-html-documents-with-embedded-objects"><span class="toc-text"> 2.4. HTML Documents with Embedded Objects</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-http-authentication"><span class="toc-text"> 2.5. HTTP Authentication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab3-dns"><span class="toc-text"> lab3 DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#31-nslookup"><span class="toc-text"> 3.1. nslookup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-ifconfig"><span class="toc-text"> 3.2. ifconfig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-tracing-dns-with-wireshark"><span class="toc-text"> 3.3. Tracing DNS with Wireshark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-play-with-nslookup"><span class="toc-text"> 3.4. play with nslookup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#341-nslookup-mitedu"><span class="toc-text"> 3.4.1 nslookup mit.edu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#342-nslookup-typens-mitedu"><span class="toc-text"> 3.4.2 nslookup –type&#x3D;NS mit.edu</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab4-udp"><span class="toc-text"> lab4 UDP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab5-tcp"><span class="toc-text"> lab5 TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#51-a-first-look-at-the-captured-trace"><span class="toc-text"> 5.1 A first look at the captured trace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#52-tcp-basics"><span class="toc-text"> 5.2 TCP Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#53-tcp-congestion-control-in-action"><span class="toc-text"> 5.3. TCP congestion control in action</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Elite-X</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://elite-zx.github.io">Elite-X</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://elite-zx.github.io/2023/05/18/computer-Network/Wireshark-Lab/">https://elite-zx.github.io/2023/05/18/computer-Network/Wireshark-Lab/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Foundation/">Foundation</a></div><div class="post_share"><div class="social-share" data-image="/img/cat.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/24/computer-Network/socket-programming/" title="[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs "><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs </div></div></a></div><div class="next-post pull-right"><a href="/2023/05/06/OS-Learning/HIT-OS-Labs/" title="[HIT-OS]哈工大操作系统实验lab1~8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">[HIT-OS]哈工大操作系统实验lab1~8</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/03/06/CSAPP-Lab/CSAPP-LAB/" title="CMU CS15213: CSAPP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-06</div><div class="title">CMU CS15213: CSAPP</div></div></a></div><div><a href="/2023/02/04/CSAPP-Lab/assembly/" title="汇编语言【王爽】实验流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-04</div><div class="title">汇编语言【王爽】实验流程</div></div></a></div><div><a href="/2023/05/31/computer-Network/CS144/" title="Stanford CS144 Spring 2023"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-31</div><div class="title">Stanford CS144 Spring 2023</div></div></a></div><div><a href="/2023/05/24/computer-Network/socket-programming/" title="[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs "><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-24</div><div class="title">[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs </div></div></a></div><div><a href="/2023/05/06/OS-Learning/HIT-OS-Labs/" title="[HIT-OS]哈工大操作系统实验lab1~8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">[HIT-OS]哈工大操作系统实验lab1~8</div></div></a></div><div><a href="/2023/05/06/OS-Learning/HIT-OS/" title="[HIT-OS]哈工大操作系统Notes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-06</div><div class="title">[HIT-OS]哈工大操作系统Notes</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab1-getting-start"><span class="toc-text"> lab1 Getting Start</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab2-http"><span class="toc-text"> lab2 HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#21-the-basic-http-getresponse-interaction"><span class="toc-text"> 2.1. The Basic HTTP GET&#x2F;response interaction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-the-http-conditional-getresponse-interaction"><span class="toc-text"> 2.2. The HTTP CONDITIONAL GET&#x2F;response interaction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-retrieving-long-documents"><span class="toc-text"> 2.3. Retrieving Long Documents</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-html-documents-with-embedded-objects"><span class="toc-text"> 2.4. HTML Documents with Embedded Objects</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-http-authentication"><span class="toc-text"> 2.5. HTTP Authentication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab3-dns"><span class="toc-text"> lab3 DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#31-nslookup"><span class="toc-text"> 3.1. nslookup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-ifconfig"><span class="toc-text"> 3.2. ifconfig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-tracing-dns-with-wireshark"><span class="toc-text"> 3.3. Tracing DNS with Wireshark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-play-with-nslookup"><span class="toc-text"> 3.4. play with nslookup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#341-nslookup-mitedu"><span class="toc-text"> 3.4.1 nslookup mit.edu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#342-nslookup-typens-mitedu"><span class="toc-text"> 3.4.2 nslookup –type&#x3D;NS mit.edu</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab4-udp"><span class="toc-text"> lab4 UDP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lab5-tcp"><span class="toc-text"> lab5 TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#51-a-first-look-at-the-captured-trace"><span class="toc-text"> 5.1 A first look at the captured trace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#52-tcp-basics"><span class="toc-text"> 5.2 TCP Basics</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Elite-X</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
@@ -715,7 +714,7 @@ HTTPS代表着在TLS上的HTTP，因此除非您拥有将TLS解密为明文所�
       repo: 'Elite-zx.github.io',
       owner: 'Elite-zx',
       admin: ['Elite-zx'],
-      id: '9b2049bd24e63e696536a3cd161ee586',
+      id: 'a11146678f31f98d5f50f8bc51b860cf',
       updateCountCallback: commentCount
     },null))
 
