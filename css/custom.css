@@ -1,30 +1,30 @@
 /* 首页文章卡片 */
 #recent-posts > .recent-post-item{
-  background: rgba(224, 222, 222, 0.55555);
+  background:rgba(24, 28, 32, 255)!important;
 }
 /* 首页侧栏卡片 */
 .card-widget{
-  background:rgba(224, 222, 222, 0.7)!important;
+  background:rgba(24, 28, 32, 255)!important;
 }
 /* 文章页面正文背景 */
 div#post{
-  background: rgba(255, 255, 255, 0);
+  background: rgba(28, 33, 39, 255);
 }
 /* 分页页面 */
 div#page{
-  background: rgba(255, 255, 255, 0);
+  background: rgba(28, 33, 39, 255);
 }
 /* 归档页面 */
 div#archive{
-  background: rgba(255, 255, 255, 0);
+  background: rgba(28, 33, 39, 255);
 }
 /* 标签页面 */
 div#tag{
-  background: rgba(255, 255, 255, 0);
+  background: rgba(28, 33, 39, 255);
 }
 /* 分类页面 */
 div#category{
-  background: rgba(255, 255, 255, 0);
+  background: rgba(28, 33, 39, 255)
 }
 
 #footer {
@@ -127,7 +127,7 @@ div#category{
   }
 }
 .loading-img {
-  background: url(../img/cat.jpg) no-repeat center center;
+  background: url(../img/avatar.JPG) no-repeat center center;
   background-size: cover;
 }
 
