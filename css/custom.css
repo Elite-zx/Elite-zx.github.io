@@ -28,7 +28,7 @@ div#category{
 }
 
 #footer {
-    background: rgba(255,255,255,.15);
+    background: rgba(24,28,32,255)
     color: #000;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -36,7 +36,7 @@ div#category{
 }
 
 #footer::before {
-    background: rgba(255,255,255,.15)
+    background: rgba(24,28,32,255)
 }
 
 #footer #footer-wrap {
@@ -48,7 +48,7 @@ div#category{
 }
 
 .gt-container.gt-header { 
-    background: rgba(255,255,255,.15)
+    background: rgba(24,28,32,255)
 }
 
 
