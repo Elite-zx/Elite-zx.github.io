@@ -54,7 +54,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-12-16 13:35:34'
+  postUpdate: '2023-12-16 16:06:12'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -205,16 +205,17 @@ document.addEventListener('pjax:send', () => {
 --with-x11
 
 make -j $(nproc) &amp;&amp; make install
-
 安装汇编器NASM
-&#96;&#96;&#96;zsh
 sudo apt update &amp;&amp; sudo apt -y install nasm
  1.2. 配置bochs
 根据书在bochsrc.disk中写入以下内容
 # bochs configuration file
 # bochsrc.disk
 
-# memory size: ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/31/computer_network/CS144/" title="[Stanford CS144 Spring 2023] 手搓一个TCP">[Stanford CS144 Spring 2023] 手搓一个TCP</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-30T16:00:00.000Z" title="Created 2023-05-31 00:00:00">2023-05-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Computer-Network/">Computer Network</a></span></div><div class="content"> 1.  lab0 networking warmup
+# memory size: 32MB
+megs: 32
+
+# BI ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/31/computer_network/CS144/" title="[Stanford CS144 Spring 2023] 手搓一个TCP">[Stanford CS144 Spring 2023] 手搓一个TCP</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-30T16:00:00.000Z" title="Created 2023-05-31 00:00:00">2023-05-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Computer-Network/">Computer Network</a></span></div><div class="content"> 1.  lab0 networking warmup
  1.1. Set up GNU/Linux on your computer
 ubuntu22.04LTS下执行
 sudo apt update &amp;&amp; sudo apt install git cmake gdb build-essential clang \
