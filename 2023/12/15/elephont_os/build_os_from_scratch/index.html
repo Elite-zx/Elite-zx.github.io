@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[操作系统真象还原] 从0开始自制操作系统 | Xun's blog</title><meta name="author" content="Xun Morris"><meta name="copyright" content="Xun Morris"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="1. 部署工作环境，安装并配置bochs 我的系统为ubuntu22.04  1.1. 安装bochs  在这里下载好bochs的源码包，我使用的版本是boch-2.7    构建安装  .&#x2F;configure \ --prefix&#x3D;&#x2F;home&#x2F;elite-zx&#x2F;bochs \ --enable-debugger \ --enable-disas">
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[操作系统真象还原] 从0开始自制操作系统 | Xun's blog</title><meta name="author" content="Xun Morris"><meta name="copyright" content="Xun Morris"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="获取源码：XUN-OS  1. 部署工作环境，安装并配置bochs 我的系统为ubuntu22.04  1.1. 安装bochs  在这里下载好bochs的源码包，我使用的版本是boch-2.7    构建安装  .&#x2F;configure \ --prefix&#x3D;&#x2F;home&#x2F;elite-zx&#x2F;bochs \ --enable-debugger \ --">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[操作系统真象还原] 从0开始自制操作系统">
 <meta property="og:url" content="https://elite-zx.github.io/2023/12/15/elephont_os/build_os_from_scratch/index.html">
 <meta property="og:site_name" content="Xun&#39;s blog">
-<meta property="og:description" content="1. 部署工作环境，安装并配置bochs 我的系统为ubuntu22.04  1.1. 安装bochs  在这里下载好bochs的源码包，我使用的版本是boch-2.7    构建安装  .&#x2F;configure \ --prefix&#x3D;&#x2F;home&#x2F;elite-zx&#x2F;bochs \ --enable-debugger \ --enable-disas">
+<meta property="og:description" content="获取源码：XUN-OS  1. 部署工作环境，安装并配置bochs 我的系统为ubuntu22.04  1.1. 安装bochs  在这里下载好bochs的源码包，我使用的版本是boch-2.7    构建安装  .&#x2F;configure \ --prefix&#x3D;&#x2F;home&#x2F;elite-zx&#x2F;bochs \ --enable-debugger \ --">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://elite-zx.github.io/img/avatar.JPG">
 <meta property="article:published_time" content="2023-12-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-16T05:17:02.980Z">
+<meta property="article:modified_time" content="2023-12-16T05:33:48.082Z">
 <meta property="article:author" content="Xun Morris">
 <meta property="article:tag" content="project">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-12-16 13:17:02'
+  postUpdate: '2023-12-16 13:33:48'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -188,7 +188,8 @@ if (false) {
 document.addEventListener('pjax:send', () => {
   Pace.restart()
 })
-</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://unpkg.com/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Xun's blog"><span class="site-name">Xun's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">[操作系统真象还原] 从0开始自制操作系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-14T16:00:00.000Z" title="Created 2023-12-15 00:00:00">2023-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-16T05:17:02.980Z" title="Updated 2023-12-16 13:17:02">2023-12-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Operating-System/">Operating System</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="[操作系统真象还原] 从0开始自制操作系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="1-部署工作环境安装并配置bochs"><a class="markdownIt-Anchor" href="#1-部署工作环境安装并配置bochs"></a> 1. 部署工作环境，安装并配置bochs</h1>
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://unpkg.com/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Xun's blog"><span class="site-name">Xun's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">[操作系统真象还原] 从0开始自制操作系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-14T16:00:00.000Z" title="Created 2023-12-15 00:00:00">2023-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-16T05:33:48.082Z" title="Updated 2023-12-16 13:33:48">2023-12-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Operating-System/">Operating System</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="[操作系统真象还原] 从0开始自制操作系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>获取源码：<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/XUN-OS">XUN-OS</a></p>
+<h1 id="1-部署工作环境安装并配置bochs"><a class="markdownIt-Anchor" href="#1-部署工作环境安装并配置bochs"></a> 1. 部署工作环境，安装并配置bochs</h1>
 <p>我的系统为ubuntu22.04</p>
 <h2 id="11-安装bochs"><a class="markdownIt-Anchor" href="#11-安装bochs"></a> 1.1. 安装bochs</h2>
 <ol>
@@ -334,7 +335,6 @@ ata0-master: type=disk, path="hd60M.img", mode=flat
 <p>此时提示not a bootable disk的错误，这说明使用bochs创建的盘不是一个真正的启动盘</p>
 <h2 id="22-编写mbr创建真正的启动盘"><a class="markdownIt-Anchor" href="#22-编写mbr创建真正的启动盘"></a> 2.2. 编写MBR创建真正的启动盘</h2>
 <p>下面我们用汇编语言写一个MBR，并用nasm汇编器生成bin格式（纯二进制）的文件</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S2/mbr.S">mbr.S</a></p>
 <p>上面这段代码主要完成了清屏，在光标处打印一个字符串，最后的代码确保了该MBR文件汇编之后(<code>nasm -o mbr.bin mbr.S</code>)是512个字节，最后的2个魔数确保了BIOS会加载这个程序 (56)</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/12c4417b8b6621f67f81f75b3898f4cd.png" class="">
 <p>因为BIOS最后一个项工作是加载启动盘的0号盘面0号磁道1号扇区（扇区从1开始编号，而非0）中的内容到物理地址0x7c00中，因此我们要把我们的mbr.bin文件加载到该扇区中，通过dd命令：</p>
@@ -355,7 +355,6 @@ ata0-master: type=disk, path="hd60M.img", mode=flat
 <p>显卡 (显示适配器) 是显示器的I/O端口，显存是显卡内部的一块内存，显卡就是读取这段内存并把内容发送到显示器上。通过往显存上写入数据，同时遵循ASCII标准，就可以操纵显示器显示我们想要的内容</p>
 <h2 id="31-mbr-v2"><a class="markdownIt-Anchor" href="#31-mbr-v2"></a> 3.1. MBR V2</h2>
 <p>先用一个附加段寄存器gs保存显存中用于文本模式的地址以作为段基址，段内每2个字节为一个字符</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S3/mbr.S">MBR.S</a></p>
 <p>在bochs上的运行结果：</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/9f17c9fdd145275b0c5904baf690418b.png" class="">
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/01fd7b870a8d3fddc73df683797b60fd.png" class="">
@@ -363,13 +362,10 @@ ata0-master: type=disk, path="hd60M.img", mode=flat
 <p>这一节先是介绍了磁盘 (主要指磁盘，另外还有固态硬盘SSD) 的工作原理，再介绍了硬盘对应的I/O接口硬盘控制器中的端口寄存器。我们正是通过读写这些寄存器间接完成CPU与磁盘的交互</p>
 <p>计算机加电之后，先执行BIOS，接着BIOS把CPU指挥棒交给了MBR，这是我们之前完成的流程。接下来，MBR要传递CPU指挥棒，传递给谁呢？内核加载器！</p>
 <p>那么我们MBR要做的事情，就是把硬盘上的内核加载器读取到实模式的1MB内存的空闲位置中，并跳转到内核加载器去执行</p>
-<p>MBR: <a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S3/mbr-v3.S">MBR-V3.S</a></p>
 <pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">nasm -I include&#x2F; -o mbr.bin mbr-v3.S
 dd if&#x3D;mbr.bin of&#x3D;..&#x2F;..&#x2F;bochs&#x2F;hd60M.img bs&#x3D;512 count&#x3D;1 conv&#x3D;notrunc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>kernelloader-v1: <a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S3/loader.S">loader.S</a></p>
 <pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">nasm -I include&#x2F; -o loader.bin loader.S
 dd if&#x3D;loader.bin of&#x3D;..&#x2F;..&#x2F;bochs&#x2F;hd60M.img bs&#x3D;512 count&#x3D;1 seek&#x3D;2 conv&#x3D;notrunc # seek&#x3D;2 means that the file is placed in the 3rd sector of the boot disk<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>header file：<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S3/include/boot.inc">include/boot.inc</a></p>
 <p>这里我们简单的实现了一个内核加载器，它只是简单的向屏幕上打印&quot;2 loader&quot;</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/4bd16a974fe4cafdde798e3edde9c2cd.png" class="">
 <h1 id="4-从实模式到保护模式"><a class="markdownIt-Anchor" href="#4-从实模式到保护模式"></a> 4. 从实模式到保护模式</h1>
@@ -380,8 +376,7 @@ dd if&#x3D;loader.bin of&#x3D;..&#x2F;..&#x2F;bochs&#x2F;hd60M.img bs&#x3D;512 c
 <li>加载gdt (155)</li>
 <li>将控制寄存器CR0的pe位置1 (158)</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S4/loader.S">Loader.S</a><br />
-为什么把段基址设为0 :<br />
+<p>为什么把段基址设为0 :<br />
 无论是在实模式还是在保护模式，x86访问内存的机制都是段基址：偏移地址的形式。现在CPU进入保护模式了，寄存器（除段寄存器，现在段寄存器是选择子而非段基址了）和地址总线都拓展到了32位，所以无需设置段基址就可以访问到整块内存（4GB），内存变成了平坦模型（单段），无需再像实模式哪样通过切换段基址来访问整个地址空间，因此我们对段寄存器采取简单的做法：把段基址设为0，<s>所以这里还没有实现对不同段的保护。</s> 而段的长度单位（粒度）我们选择的是4k，所以段界限(limit)为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>G</mi><mi>B</mi><mi mathvariant="normal">/</mi><mn>4</mn><mi>K</mi><mi>B</mi><mo>=</mo><msup><mn>2</mn><mn>20</mn></msup><mo>=</mo><mn>0</mn><mi>x</mi><mi>F</mi><mi>F</mi><mi>F</mi><mi>F</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">4GB/4KB = 2^{20} = 0xFFFFF</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mord mathnormal">G</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">/</span><span class="mord">4</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span></span></p>
 <p>进入保护模式前为什么有一个jmp指令：<br />
 这样做的目的有2个</p>
@@ -390,12 +385,10 @@ dd if&#x3D;loader.bin of&#x3D;..&#x2F;..&#x2F;bochs&#x2F;hd60M.img bs&#x3D;512 c
 <li>清空流水线<br />
 以上两点在P.172有详细的解释</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S4/include/boot.inc">include/boot.inc</a><br />
-书上boot.inc部分的代码是有问题的，显卡的段基址的低位不应该是和代码段和数据段一样的0x00，而是应该为0x0b，这样才能和段描述符的低位4字节组成段基址0xb800</p>
+<p>书上boot.inc部分的代码是有问题的，显卡的段基址的低位不应该是和代码段和数据段一样的0x00，而是应该为0x0b，这样才能和段描述符的低位4字节组成段基址0xb800</p>
 <p>此外，因为此时的Loader.bin的大小已经超过一个扇区的512字节：</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/d6c7b98827b3e12b8febd778a445222a.png" class="">
 <p>因此我们要修改之前的MBR-V3.S，让它读取loader起始地址开始的4个扇区（其实2个就足以，不过为了避免将来再过来修改，就多读点咯）</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S4/mbr-v4.S">MBR-V4.S</a></p>
 <p>相应的，在用dd命令把loader.bin加载到磁盘映象文件时，count参数要指定为4</p>
 <pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">dd if&#x3D;loader.bin of&#x3D;..&#x2F;..&#x2F;bochs&#x2F;hd60M.img bs&#x3D;512 count&#x3D;4 seek&#x3D;2 conv&#x3D;notrunc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果我们的文件大小 (这里是623B) 小于 dd命令指定读取到磁盘映象文件的大小(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>l</mi><mi>o</mi><mi>c</mi><mi>k</mi><mo>×</mo><mi>c</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>t</mi><mo>=</mo><mn>512</mn><mo>×</mo><mn>4</mn><mo>=</mo><mn>2</mn><mi>K</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">block \times count =512 \times 4 = 2KB</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span>)，那么dd只会复制实际文件大小的数据 (623B)</p>
@@ -422,8 +415,6 @@ PE大写意味着该位已经被置1</p>
 <p>这一节通过BIOS的0x15中断的3个子功能完成对物理内存容量的获取，主要是通过0xE820号中断，我们通过计算该中断获取的内存段中最高的内存上限值作为物理内存容量信息，所以我们的汇编代码中还有一个遍历内存段取最大内存上限值的过程。</p>
 <p>此外，为了内存对齐，进而使得指令执行效率更高，我们想要把数据部分放在内核加载器loader的前0x300个字节，这意味这loader的指令真正开始的位置是物理地址<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>900</mn><mo>+</mo><mn>0</mn><mi>x</mi><mn>300</mn><mo>=</mo><mn>0</mn><mi>x</mi><mi>b</mi><mn>00</mn></mrow><annotation encoding="application/x-tex">0x900+0x300=0xb00</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">9</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">3</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord mathnormal">b</span><span class="mord">0</span><span class="mord">0</span></span></span></span> 处。之前我们在loader的开头加了一句jmp语句，这是因为mbr跳转到loader后，loader的开头是一堆数据定义，而不是指令，所以加上这条jmp是有必要的。但是现在，既然我们能知道loader的指令起始地址是0xb00，那么我们直接在修改MBR中的跳转指令<code>jmp LOADER_BASE_ADDR </code>为<code>jmp LOADER_BASE_ADDR + 0x300</code>，这样就可以省略到loader开头的jmp指令（占3个字节），从而使得在它之后定义的数据的地址均对齐到偶数（具体可见P.183）。</p>
 <p>这里我其实产生过疑惑，为什么汇编就可以指定数据在指令之前，即我在一堆指令之前用dd,dw指令定义了一堆数据，就可以保证在该程序执行时，数据是在指令之前的。此时就要搬出我们伟大的工具chatgpt来问问了: 这主要是因为汇编语言提供了对计算机硬件的直接控制能力，包括内存地址的直接访问和操作。当你在汇编程序中使用伪指令如 <code>db</code>, <code>dw</code>, <code>dd</code> 等定义数据，它们会按照出现的顺序在生成的机器代码（或对象文件）中占据空间。当你在源代码中书写这些伪指令时，汇编器会按照你的指示将对应的数据字节、字、双字放置在生成的代码中。而类似C语言这样的高级语言，数据（例如全局变量、静态变量和局部变量）和代码（函数）是被编译器和链接器管理的。编译器和链接器会根据操作系统的规范将程序的不同部分放置在不同的内存区域中。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S5/loader.S">loader.S</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S5/mbr-v5.S">MBR-V5.S</a></p>
 <p>查看物理地址为0xb00的变量total_mem_bytes的值是否为我们bochs配置文件bochs.disk中定义是32MB (0x200 0000):</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/d5b995560753dcd2d2811fbe9534470e.png" class="">
 <p>可见检测物理内存容量的结果正确。</p>
@@ -448,9 +439,7 @@ PE大写意味着该位已经被置1</p>
 <p><strong>为什么要移动GDT到内核空间？为什么要修改视频段的段描述符？</strong><br />
 这2者都是因为在分页机制下，内核在虚拟地址空间的高端1GB中，而这2者都属于内核。<br />
 GDT是内核空间的东西，而内核空间现在在虚拟地址空间中处于高端1GB，因此要调整之前的GDT地址，把它放入这1GB中。而修改视频段的段描述符中的段基址是因为显存也要在内核中，不能让用户直接控制显存这个硬件，必须通过OS。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S5/b/include">include/boot.inc</a></p>
-<p>在创建页表时，把PDT放在了物理地址0x10000处 (这也是后续填入控制寄存器CR3的值)，并将页表紧随其后。因为PDT的大小是4KB，因此第一个页表的地址是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>100000</mn><mo>+</mo><mn>0</mn><mi>x</mi><mn>1000</mn><mo>=</mo><mn>0</mn><mi>x</mi><mn>101000</mn></mrow><annotation encoding="application/x-tex">0x100000+0x1000=0x101000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span>。在页目录项中填入页表的地址，这样页表就创建好了。同样的，在页表项中填入物理页框的地址（不同页框地址相隔4KB，这也是为什么有edx+4096），这样页表项就创建好了<br />
-<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S5/b/loader.S">loader.S</a></p>
+<p>在创建页表时，把PDT放在了物理地址0x10000处 (这也是后续填入控制寄存器CR3的值)，并将页表紧随其后。因为PDT的大小是4KB，因此第一个页表的地址是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>100000</mn><mo>+</mo><mn>0</mn><mi>x</mi><mn>1000</mn><mo>=</mo><mn>0</mn><mi>x</mi><mn>101000</mn></mrow><annotation encoding="application/x-tex">0x100000+0x1000=0x101000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span>。在页目录项中填入页表的地址，这样页表就创建好了。同样的，在页表项中填入物理页框的地址（不同页框地址相隔4KB，这也是为什么有edx+4096），这样页表项就创建好了</p>
 <p>运行结果：<br />
 打印V表示OS已经开启分页机制，进程开始使用虚拟（Virtual）地址</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/f220cfb82f4de5fa7652d7724e1b89c1.png" class="">
@@ -495,9 +484,6 @@ GDT是内核空间的东西，而内核空间现在在虚拟地址空间中处�
 <p>打印K字符，说明我们已经进入内核模式，这个打印语句是我自己在进入内核的相关代码中加的。</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/873c22390f65ac254f2c5d9418ea399c.png" class="">
 <p>查看当前执行的指令，是指令<code>jmp $</code>，一个死循环，而且地址在我们的内核映象的起始地址0x1500附近，说明正在执行的就是内核中的语句<code>while(1)</code></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S5/c/loader.S">loader.S</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S5/c/include/boot.inc">include/boot.inc</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S5/c/kernel/main.c">kernel/main.c</a></p>
 <h2 id="54-特权级前瞻"><a class="markdownIt-Anchor" href="#54-特权级前瞻"></a> 5.4. 特权级前瞻</h2>
 <p>这一节的内容写了很多，也花了我挺长时间看完。日后拾起来的话主要看看最好先看看P.247的例子。<br />
 主要的关键内容如下：<br />
@@ -507,10 +493,6 @@ CPL(current privilege level)可以就理解为当前(current)CPU所执行的代�
 即访问者的特权级要高于受访者（实际上这对数据段资源成立，对代码段来说，只能平级访问，也就是说要求是相等）。</p>
 <p>接下来涉及调用门，用户程序可以通过调用门让CPU进入高特权级。门的作用用P.237的蹦床原理来形容就很形象。这时候的特权级检查就发生变化了，一共有2步检查，第一步与门槛比较，即门描述符，第二步与门框比较，即门描述符对应的内核代码。</p>
 <h1 id="6-从一个简单的print开始完善我的内核"><a class="markdownIt-Anchor" href="#6-从一个简单的print开始完善我的内核"></a> 6. 从一个简单的print开始，完善我的内核</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S6/lib/kernel/print.S">lib/kernel/print.S</a><br />
-<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S6/lib/kernel/print.h">lib/kernel/print.h</a><br />
-<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S6/lib/stdint.h">lib/stdint.h</a><br />
-<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S6/kernel/main.c">kernel/main.c</a></p>
 <h2 id="61-打印单个字符的print"><a class="markdownIt-Anchor" href="#61-打印单个字符的print"></a> 6.1. 打印单个字符的print</h2>
 <p>这一节主要是完成一个print函数。要完成这个函数光会往显存上mov数据是不够的，还得学会如何操作显卡的端口(即寄存器)以控制光标的位置，以及处理控制字符，打印的字符超出屏幕时实现滚屏等。显卡的寄存器是目前遇到过的端口中比较特殊的，需要通过类似索引数组的方式完成对指定端口的读写，具体来说就先在Address Register中写好我们需要哪个索引下的端口，然后再通过Data Register完成对索引下寄存器的读写操作。</p>
 <p>除此之外，这里实现滚屏的方式也很巧妙，具体体现在处理光标的移动上。这里的滚屏，具体指的就是把当前内容向上滚动一屏，滚动之后的光标应该出现在最后一行（即第24行，行数从0开始）的首位，而这个移动光标的操作正好可以与处理回车符的操作放在一起，也就是说我们可以把这个操作看作是在当前光标下处理一个回车符。在处理回车符时，我们先把bx（该寄存器被我们原来代表光标地址）对80取余，再在bx上减去这个余数，于是bx就指向了行首的位置，接着再<code>add bx, 80</code>那么bx就到了下一行的行首了。</p>
@@ -522,7 +504,6 @@ CPL(current privilege level)可以就理解为当前(current)CPU所执行的代�
 具体实现中，把<code>\r</code>和<code>\n</code>统一当作了回车符号处理。处理<code>\b</code>时，先把光标往前移动一个位置，接着在光标原来的指向的字符位置处填上空格，注意这里的字符位置，是通过光标位置乘2之后得到的。</li>
 </ul>
 <p>此外，print的实现定义在汇编文件print.S中，调用在C文件main.c中，是高级语言和汇编语言之间的调用。main函数中向print函数传递参数的方式就是把参数压入栈中，这由编译器帮我们完成（即编译器生成相关的机器码），而汇编函数print从栈中拿到对应的参数，这个步骤由我们自己编写。</p>
-<p>编译链接加载脚本：<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/blob/main/S6/gen.sh">gen.sh</a></p>
 <p>运行结果：<br />
 这里的数字我就没有按照书上输出啦，我换成了我完成这个函数的日期。运行结果与预期一致，backspace被正确的处理了。</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/1c3dc981f2a51ae9120487a02fbc5934.png" class="">
@@ -544,7 +525,6 @@ eg:<br />
 <p>可以看到，函数main传递过来的参数在从栈顶数下来的第9个项的位置 (从0开始计数)，前9项是指令<code>pushad</code>压入是8个4字节的通用寄存器和main函数的返回地址，说明代码中从<code>[ebp+4*9]</code>取出参数是正确的</p>
 <h1 id="7-让中断驱动操作系统内核"><a class="markdownIt-Anchor" href="#7-让中断驱动操作系统内核"></a> 7. 让中断驱动操作系统内核</h1>
 <h2 id="71-初步建立33个中断内联汇编开始发挥功效"><a class="markdownIt-Anchor" href="#71-初步建立33个中断内联汇编开始发挥功效"></a> 7.1. 初步建立33个中断，内联汇编开始发挥功效</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S7/a">S7/a</a></p>
 <p>这一节呢用了比较长的时间，大概有个3天吧。主要是上个周末，休息了一天，也不是完全休息，但是也没搞OS，而是去重新配置了一下vimrc, 加了几个好用的插件，比如vim-surround, vim-which-key等，我就喜欢这种高度自定义并且可扩展的软件 (另一个就是obsidian)，只要vim还能满足我的需求，我宁愿花时间去配置它，也不会转去vscode</p>
 <p>那么就简单的谈谈这一节吧。 这节我们要做好的事情主要就2件：</p>
 <ol>
@@ -590,8 +570,7 @@ eg:<br />
 sti指令把IF置1, 对CPU执行开中断，使得CPU可以响应中断代理8259A发来的INTR信号和中断向量号信息</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/a9ed68083a6dd6c95da3a0b98a6a88fb.png" class="">
 <h2 id="72-移动中断处理函数到c程序中"><a class="markdownIt-Anchor" href="#72-移动中断处理函数到c程序中"></a> 7.2. 移动中断处理函数到C程序中</h2>
-<p>上一小节在汇编程序中完成了中断处理程序，这一节把中断处理程序移到c程序中，毕竟C程序更简洁也更容易编写和维护，而在汇编程序定义中断程序的入口地址。<br />
-<a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S7/b">S7/b</a></p>
+<p>上一小节在汇编程序中完成了中断处理程序，这一节把中断处理程序移到c程序中，毕竟C程序更简洁也更容易编写和维护，而在汇编程序定义中断程序的入口地址。</p>
 <h2 id="73-深入探究中断时的栈"><a class="markdownIt-Anchor" href="#73-深入探究中断时的栈"></a> 7.3. 深入探究中断时的栈</h2>
 <ol>
 <li>通过bochs调试命令（主要是<code>show int</code>）找到中断入口点</li>
@@ -621,13 +600,11 @@ sti指令把IF置1, 对CPU执行开中断，使得CPU可以响应中断代理825
 <li>SS_old : ESP_old —  对比栈中相应的值和进入中断前的ss和esp的值，发现对不上，我想不应该啊，咋回事呢？原来在我们的实现中发生中断时，CPU是从内核的main函数跳转到中断程序去执行，属于特权级的平级转移，CPU会把这种转移当作普通的直接远转移（即使CS前后一致，还是会压入在栈中CS），因此不会有栈的切换，也就没有在栈中压入ESP_old和SS_old</li>
 </ul>
 <h2 id="74-让时钟中断来的更加猛烈些吧"><a class="markdownIt-Anchor" href="#74-让时钟中断来的更加猛烈些吧"></a> 7.4. 让时钟中断来的更加猛烈些吧</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S7/c">S7/c</a><br />
-这一节通过设置可编程计时器Intel 8253完成了对时钟信号产生频率的提速<br />
+<p>这一节通过设置可编程计时器Intel 8253完成了对时钟信号产生频率的提速<br />
 运行结果：<br />
 感觉不出来有什么提速，毕竟窗口就这么个大小，奇怪的是这里额外还触发了CPU内部的0xD号中断（General protection fault）</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/b27febf27caf090175448db7b09a1278.png" class="">
 <h1 id="8-让位图大放光彩实现内存管理"><a class="markdownIt-Anchor" href="#8-让位图大放光彩实现内存管理"></a> 8. 让位图大放光彩，实现内存管理</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S8">S8</a></p>
 <h2 id="81-磨刀不误砍柴工学习makefile-实现assert断言和字符串操作函数"><a class="markdownIt-Anchor" href="#81-磨刀不误砍柴工学习makefile-实现assert断言和字符串操作函数"></a> 8.1. 磨刀不误砍柴工—学习makefile, 实现assert断言和字符串操作函数</h2>
 <p>这一节讲解makefile的部分让我收益颇深，之前学cmake的时候，make和makefile对我来说就是个黑盒子，不知道里面具体是什么东西，只会拿来就用。现在要开始自己手写makefile了之后，也算是看见了makefile的真面目了。在我看来，makefile归根到底还是个脚本文件嘛。</p>
 <p>为了后续方便调试程序，这里要求自己实现一个给内核用的ASSERT断言，其中用到的宏函数的可变参数我倒是第一次用，看样子C语言还有很多东西我不知道呢。这里提一嘴makefile的内容，书上要求给gcc指定选项<code>-Wstrict-prototypes</code>和<code>-Wmissing-prototypes</code>，目的是要求项目中的函数都有函数声明并且函数声明中必须带有参数类型，这意味着没有参数的函数也要加上一个void类型说明, 我没这个习惯，而且参照linux内核的代码风格上也没要求这两点，于是这2个选项我是去掉了的。</p>
@@ -674,7 +651,6 @@ sti指令把IF置1, 对CPU执行开中断，使得CPU可以响应中断代理825
 <p>这一节呢，先是花了不少的篇幅来说清楚进程和线程的关系，刚哥是真贴心啊。归根结底，进程=线程+资源，CPU执行的就是线程。如果你要说你压根不晓得线程啊，难道我写的hello world程序执行的时候也叫线程？那么我要说如果进程中没有创建线程，那么这个进程就视为单线程的进程。哈哈哈，所以说概念这种东西真没必要隔那咬文嚼字的，没啥意义，在我看来能自圆其说，又符合实现的方式即可。</p>
 <p>说到这里，在讲述这一章内容之前，我想反思一下过去的学习方式。各位看官不感兴趣的可以移步到下一个段落哈。过去的我呢，其实也没有多旧，就在我看这本书之前吧，我看书总习惯写点什么，比如我看程序员的自我修养这本书的时候，硬是闲的蛋疼的非要把每一章讲的知识点总结下来，好像不用自己的话说一遍就不爽似的，现在我觉得这样的做法极其的浪费时间，而且效益也不好。我为什么会有这样的思想改观呢？因为我有一天意识到，我又不是要出书，我干嘛要费心思把这些东西重新写一遍，我理解力又没那么差，而且这种行为真的无异于中学时代靠记笔记安慰自己的做法，真的没意义。从另一个角度出发，作为一个初学者，刚学习完某一章，你又能写出个什么东西呢？表达上绝对是有失偏颇的。不得不说，这样的学习方式，是我上大学以来学什么东西都很慢，学什么东西效果都不好，学完了还没有任何成品的根本原因。 现在我认为学某个科目，某个领域，最好的做法就是快速过一遍知识点，千万别搁那咬文嚼字的，看懂个七七八八就行了，然后立马实践，实践才能让你真正记住知识，自己折腾过的过程，绝对比那枯燥的文字更能在你脑中留下印象，最后实践完了，既能收获个成品，并且还可以带着实践的经验重新审视这些知识，总结出一些领悟和心得，这样的领域和心得才是唯一有价值记下来的。这里贴一个<a target="_blank" rel="noopener" href="https://kuizuo.cn/blog/why-i-dont-write-notes">博客链接</a>，讨论的就是学计算机科学是否要记笔记，我认为博主说的就很好，还留下了评论。这部分就写到这。</p>
 <hr />
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S9">S9</a></p>
 <p>这一节算是比较有难度的了，整体我都来来回回看了很多遍才开始实现。其实本章围绕的一个核心问题就是：执行中的线程cur_thread遇到时钟中断(陷入内核)，并在时钟中断中发现该线程时间片到期了（即<code>cur_thread.ticks==0</code>），那么该线程就要被内核中的调度器schedule函数和切换器switch_to换下，并让CPU执行新的线程。要怎么保证线程还能恢复！ 是的，我认为最关键的问题就是，怎么让线程恢复执行。这主要依靠一个switch_to中的ret指令和中断入口程序(kernel.S)中的一个iret指令，操作系统要组织好栈使得这2个指令的运行后能够恢复线程。</p>
 <p>简单用drawio（btw：向开源软件的作者们respect🫡）画了个草图以描述PCB/TCB的结构 ，其中intr_stack栈用来存储中断时任务的上下文，thread_stack原来存储在中断处理程序中任务切换时 (switch_to)的上下文。（ ps: 看到11章的时候发现关于这部分P.509有更好的的图示）</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/d8d1812933c9234ec0f1015104fb63a0.png" class="">
@@ -699,7 +675,6 @@ sti指令把IF置1, 对CPU执行开中断，使得CPU可以响应中断代理825
 <p>运行结果的顶部显示的一般保护性中断是由于显存段内的偏移量bx超出了段界限，验证如下：</p>
 <img src="/2023/12/15/elephont_os/build_os_from_scratch/1cd219d8be6f8a3be901634d1c54a2d7.png" class="">
 <h1 id="10-让终端不再静态建立输入输出系统"><a class="markdownIt-Anchor" href="#10-让终端不再静态建立输入输出系统"></a> 10. 让终端不再静态，建立输入输出系统</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/Elite-zx/Build-OS-From-Scratch/tree/main/S10">S10</a></p>
 <h2 id="101-引入锁机制修复破碎的终端"><a class="markdownIt-Anchor" href="#101-引入锁机制修复破碎的终端"></a> 10.1. 引入锁机制，修复破碎的终端</h2>
 <p>上一节中破碎的终端主要源自于多个线程对公共资源—显卡和光标寄存器的访问冲突了，解决这个问题的办法就是给终端上锁，上锁啥意思？就是一个线程进入临界区的时候，意味着它要访问某个公共资源了，它把门锁上，其他线程看见门锁了，就把自发的把状态转为blocked并加入等待队列waiter中。等进去的线程出来的时候，就会把锁打开，其他线程（在等待队列writer中的线程）就可以进去了。</p>
 <p>信号量和锁是什么联系？我觉得吧，信号量拿来就是实现锁的。在我们的实现中，锁是封装了信号量的，锁的结构体中除了信号量，还有表示锁的当前持有者的信息holder。所以锁是包含信号量的，锁机制的实现是靠信号量实现的。</p>
