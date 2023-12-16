@@ -2,6 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://elite-zx.github.io/2023/12/15/elephont_os/build_os_from_scratch/</loc>
+    
+    <lastmod>2023-12-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/2023/05/24/computer_network/socket-programming/</loc>
+    
+    <lastmod>2023-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/2023/03/06/CSAPP_lab/CSAPP-LAB/</loc>
+    
+    <lastmod>2023-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/2023/02/04/CSAPP_lab/assembly/</loc>
+    
+    <lastmod>2023-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/2023/05/31/computer_network/CS144/</loc>
+    
+    <lastmod>2023-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/2023/05/06/HIT_os/HIT-OS-Labs/</loc>
+    
+    <lastmod>2023-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://elite-zx.github.io/about/index.html</loc>
     
     <lastmod>2023-12-09</lastmod>
@@ -11,54 +65,9 @@
   </url>
   
   <url>
-    <loc>https://elite-zx.github.io/2023/05/06/HIT-OS/HIT-OS-Labs/</loc>
-    
-    <lastmod>2023-11-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/2023/02/04/CSAPP-Lab/assembly/</loc>
-    
-    <lastmod>2023-11-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/2023/03/06/CSAPP-Lab/CSAPP-LAB/</loc>
-    
-    <lastmod>2023-11-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/2023/05/31/Computer-Network/CS144/</loc>
-    
-    <lastmod>2023-11-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/2023/05/18/Computer-Network/Wireshark-Lab/</loc>
+    <loc>https://elite-zx.github.io/2023/05/18/computer_network/Wireshark-Lab/</loc>
     
     <lastmod>2023-06-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/2023/05/24/Computer-Network/socket-programming/</loc>
-    
-    <lastmod>2023-06-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,7 +94,7 @@
 
   <url>
     <loc>https://elite-zx.github.io/</loc>
-    <lastmod>2023-12-09</lastmod>
+    <lastmod>2023-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -93,7 +102,21 @@
   
   <url>
     <loc>https://elite-zx.github.io/tags/Foundation/</loc>
-    <lastmod>2023-12-09</lastmod>
+    <lastmod>2023-12-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/tags/lab/</loc>
+    <lastmod>2023-12-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://elite-zx.github.io/tags/project/</loc>
+    <lastmod>2023-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -102,35 +125,28 @@
   
   <url>
     <loc>https://elite-zx.github.io/categories/CSAPP/</loc>
-    <lastmod>2023-12-09</lastmod>
+    <lastmod>2023-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://elite-zx.github.io/categories/Computer-Network/</loc>
-    <lastmod>2023-12-09</lastmod>
+    <lastmod>2023-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://elite-zx.github.io/categories/CSAPP/assembly-language/</loc>
-    <lastmod>2023-12-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/categories/Computer-Network/Computer-Network-ATopDownApproach/</loc>
-    <lastmod>2023-12-09</lastmod>
+    <lastmod>2023-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://elite-zx.github.io/categories/Operating-System/</loc>
-    <lastmod>2023-12-09</lastmod>
+    <lastmod>2023-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
