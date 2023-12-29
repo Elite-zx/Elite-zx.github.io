@@ -1,30 +1,30 @@
 /* 首页文章卡片 */
 #recent-posts > .recent-post-item{
-  background:rgba(24, 28, 32, 255)!important;
+  background:rgba(76, 86, 106, 1)!important;
 }
 /* 首页侧栏卡片 */
 .card-widget{
-  background:rgba(24, 28, 32, 255)!important;
+  background:rgba(59, 66, 82, 1)!important;
 }
 /* 文章页面正文背景 */
 div#post{
-  background: rgba(28, 33, 39, 255);
+  background: rgba(46, 52, 64, 1);
 }
 /* 分页页面 */
 div#page{
-  background: rgba(28, 33, 39, 255);
+  background: rgba(46, 52, 64, 1);
 }
 /* 归档页面 */
 div#archive{
-  background: rgba(28, 33, 39, 255);
+  background: rgba(46, 52, 64, 1);
 }
 /* 标签页面 */
 div#tag{
-  background: rgba(28, 33, 39, 255);
+  background: rgba(46, 52, 64, 1);
 }
 /* 分类页面 */
 div#category{
-  background: rgba(28, 33, 39, 255)
+  background: rgba(46, 52, 64, 1);
 }
 
 #footer {
@@ -50,7 +50,7 @@ div#category{
     /*color: var(--font-color)*/
 /*}*/
 
-.gt-container.gt-header { 
+.gt-container.gt-header {
     background: rgba(24,28,32,255)
 }
 
