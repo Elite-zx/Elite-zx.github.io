@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://elite-zx.github.io/2023/12/15/elephont_os/build_os_from_scratch/</loc>
+    
+    <lastmod>2023-12-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://elite-zx.github.io/about/index.html</loc>
     
     <lastmod>2023-12-21</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://elite-zx.github.io/2023/05/24/computer_network/socket-programming/</loc>
     
     <lastmod>2023-12-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://elite-zx.github.io/2023/12/15/elephont_os/build_os_from_scratch/</loc>
-    
-    <lastmod>2023-12-16</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
