@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>[操作系统真象还原] 从0开始自制操作系统</title>
+      <title>操作系统真象还原: 从0开始自制操作系统 全过程记录</title>
       <link href="/2023/12/15/elephont_os/build_os_from_scratch/"/>
       <url>/2023/12/15/elephont_os/build_os_from_scratch/</url>
       
@@ -29,7 +29,7 @@
     
     
     <entry>
-      <title>[Stanford CS144 Spring 2023] 手搓一个TCP</title>
+      <title>Stanford CS144 Spring 2023: 手搓TCP</title>
       <link href="/2023/05/31/computer_network/CS144/"/>
       <url>/2023/05/31/computer_network/CS144/</url>
       
@@ -54,7 +54,7 @@
     
     
     <entry>
-      <title>[计算机网络自顶向下] Socket Programming Assignment + Miscellaneous Labs </title>
+      <title>计算机网络自顶向下: Socket Programming Assignment + Miscellaneous Labs </title>
       <link href="/2023/05/24/computer_network/socket-programming/"/>
       <url>/2023/05/24/computer_network/socket-programming/</url>
       
@@ -79,7 +79,7 @@
     
     
     <entry>
-      <title>[计算机网络自顶向下] Wireshake Lab --- HTTP DNS UDP TCP</title>
+      <title>计算机网络自顶向下: Wireshake Lab --- HTTP DNS UDP TCP</title>
       <link href="/2023/05/18/computer_network/Wireshark-Lab/"/>
       <url>/2023/05/18/computer_network/Wireshark-Lab/</url>
       
@@ -104,7 +104,7 @@
     
     
     <entry>
-      <title>[HIT-OS] 哈工大操作系统实验lab1~8</title>
+      <title>哈工大操作系统: 实验lab1~8</title>
       <link href="/2023/05/06/HIT_os/HIT-OS-Labs/"/>
       <url>/2023/05/06/HIT_os/HIT-OS-Labs/</url>
       
@@ -129,7 +129,7 @@
     
     
     <entry>
-      <title>[CMU CS15213] CSAPP</title>
+      <title>CMU CS15213: CSAPP lab1~4</title>
       <link href="/2023/03/06/CSAPP_lab/CSAPP-LAB/"/>
       <url>/2023/03/06/CSAPP_lab/CSAPP-LAB/</url>
       
@@ -154,7 +154,7 @@
     
     
     <entry>
-      <title>[汇编语言(王爽)] 实验流程</title>
+      <title>汇编语言实践</title>
       <link href="/2023/02/04/CSAPP_lab/assembly/"/>
       <url>/2023/02/04/CSAPP_lab/assembly/</url>
       
