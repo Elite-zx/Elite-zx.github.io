@@ -5444,7 +5444,7 @@ blockquote.pullquote.right {
 }
 [data-theme='dark'] {
   --global-bg: #000;
-  --font-color: rgba(255,255,255,0.7);
+  --font-color: #eceff4;
   --hr-border: rgba(255,255,255,0.4);
   --hr-before-color: rgba(255,255,255,0.7);
   --search-bg: #121212;
